@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Acceso al equipo — Fundación Red Conecta</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tinta:#003366;--indigo:#2E4053;--turquesa:#00CED1;--acero:#708090;
+  --nube:#F1F5F9;--coral:#FF7F50;
+  --hilo:rgba(255,255,255,.18);
+  --sans:'Montserrat',system-ui,sans-serif;
+  --serif:'Lora',Georgia,serif;
+  --margen:clamp(1.25rem,4vw,3.5rem);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100svh;background:var(--tinta);color:#fff;
+  font-family:var(--sans);display:flex;flex-direction:column;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--turquesa);outline-offset:4px}
+.hoja{width:100%;padding-inline:var(--margen);max-width:1560px;margin-inline:auto}
+header{padding-block:1.15rem;border-bottom:1px solid var(--hilo)}
+header img{height:30px}
+main{flex:1;display:flex;align-items:center;padding-block:clamp(3rem,10vh,6rem)}
+
+h1{
+  font-family:var(--serif);font-weight:400;letter-spacing:-.025em;line-height:1.02;
+  font-size:clamp(2.2rem,6vw,4.2rem);margin:0 0 1.25rem;
+}
+.sub{
+  font-size:.92rem;line-height:1.65;color:rgba(255,255,255,.62);
+  margin:0 0 2.75rem;max-width:46ch;font-family:var(--serif);
+}
+
+/* --- formulario --- */
+.tarjeta{max-width:420px}
+label{
+  display:block;font-size:.72rem;font-weight:600;letter-spacing:.04em;
+  color:rgba(255,255,255,.55);margin:0 0 .5rem;
+}
+input{
+  width:100%;padding:.75rem 0;border:0;border-bottom:1px solid var(--hilo);
+  background:none;color:#fff;font-family:var(--serif);font-size:1.05rem;margin-bottom:1.75rem;
+}
+input:focus{border-bottom-color:var(--turquesa);outline:none}
+button.principal{
+  width:100%;padding:.95rem;border:0;background:var(--turquesa);color:#00323a;
+  font-family:var(--sans);font-weight:600;font-size:.85rem;letter-spacing:.03em;cursor:pointer;
+}
+button.principal:hover{background:#31dcde}
+button.principal:disabled{opacity:.55;cursor:progress}
+.aviso{margin:1.5rem 0 0;padding-left:1rem;border-left:2px solid var(--coral);font-size:.85rem;line-height:1.6;display:none;color:#ffcdb8}
+.aviso.error{display:block}
+.aviso.info{display:block;border-left-color:var(--turquesa);color:#bdf1f2}
+.pie-form{margin-top:2rem;font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.6}
+.pie-form a{color:var(--turquesa)}
+
+/* --- portal --- */
+.portal{display:none;width:100%}
+.portal.visible{display:block}
+.encabezado-portal{
+  display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;justify-content:space-between;
+  padding-bottom:1.25rem;border-bottom:1px solid var(--hilo);margin-bottom:0;
+}
+.encabezado-portal p{margin:.6rem 0 0;font-size:.78rem;color:rgba(255,255,255,.5)}
+.salir{
+  background:none;border:0;border-bottom:1px solid var(--hilo);color:#fff;
+  padding:.35rem 0;font-family:var(--sans);font-size:.76rem;cursor:pointer;
+}
+.salir:hover{border-bottom-color:var(--turquesa);color:var(--turquesa)}
+.apps{display:block}
+.app{
+  display:grid;grid-template-columns:2.2rem 1fr;gap:1rem;align-items:baseline;
+  text-decoration:none;color:#fff;padding:1.5rem 0;border-bottom:1px solid var(--hilo);
+}
+.app:hover{background:rgba(255,255,255,.04)}
+.app .cifra{font-size:.78rem;font-weight:600;color:var(--turquesa)}
+.app h2{
+  font-family:var(--serif);font-weight:400;letter-spacing:-.015em;
+  font-size:clamp(1.3rem,2.6vw,2rem);margin:0 0 .35rem;line-height:1.15;
+}
+.app p{margin:0;font-family:var(--serif);font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.55;max-width:52ch}
+.app[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.recordatorio{
+  margin-top:2.5rem;padding-left:1rem;border-left:2px solid var(--coral);
+  font-family:var(--serif);font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.65;max-width:60ch;
+}
+footer{padding-block:1.5rem;border-top:1px solid var(--hilo);font-size:.72rem;color:rgba(255,255,255,.45);letter-spacing:.03em}
+footer a{color:rgba(255,255,255,.8);text-decoration:none;border-bottom:1px solid var(--hilo)}
+footer a:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hoja"><a href="index.html"><img src="assets/logo-blanco.png" alt="Fundación Red Conecta"></a></div>
+</header>
+
+<main>
+  <div class="hoja">
+
+    <!-- ---------- formulario ---------- -->
+    <section class="tarjeta" id="formulario">
+      <h1>Acceso al equipo</h1>
+      <p class="sub">Esta área contiene información de estudiantes y familias. El acceso está restringido a personas autorizadas por la Fundación.</p>
+
+      <form id="form-login" autocomplete="on">
+        <label for="correo">Correo institucional</label>
+        <input id="correo" name="email" type="email" required autocomplete="username">
+        <label for="clave">Contraseña</label>
+        <input id="clave" name="password" type="password" required autocomplete="current-password">
+        <button class="principal" type="submit" id="btn-entrar">Entrar</button>
+      </form>
+
+      <div class="aviso" id="aviso" role="status"></div>
+
+      <p class="pie-form">¿Olvidó su contraseña? Escriba a <a href="mailto:[correo institucional]">[correo institucional]</a>.</p>
+    </section>
+
+    <!-- ---------- portal ---------- -->
+    <section class="portal" id="portal">
+      <div class="encabezado-portal">
+        <div>
+          <h1>Herramientas internas</h1>
+          <p id="sesion-usuario"></p>
+        </div>
+        <button class="salir" id="btn-salir" type="button">Cerrar sesión</button>
+      </div>
+      <div class="apps" id="apps"></div>
+      <p class="recordatorio">
+        Antes de registrar información de una familia, confirme que el consentimiento informado quedó firmado.
+        No comparta enlaces de estas herramientas por fuera del equipo, ni descargue actas a equipos compartidos.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="hoja"><a href="index.html">Volver al sitio</a> · Fundación Red Conecta</div>
+</footer>
+
+<script type="module">
+/* ============================================================
+   CONFIGURACIÓN — complete estos tres bloques antes de publicar
+   ============================================================ */
+
+const SUPABASE_URL      = "";   // Ej.: "https://xxxxxxxx.supabase.co"
+const SUPABASE_ANON_KEY = "";   // Clave "anon public" del proyecto
+
+const APLICACIONES = [
+  {
+    nombre: "Entrevistas familiares",
+    descripcion: "Registro de la visita domiciliaria, valoración y acta con consentimiento firmado.",
+    url: ""   // Ej.: "https://entrevistas-red-conecta.vercel.app"
+  },
+  {
+    nombre: "Pruebas psicométricas",
+    descripcion: "Aplicación y consolidado de los instrumentos de preselección.",
+    url: ""
+  },
+  {
+    nombre: "Exploración vocacional",
+    descripcion: "Instrumento de intereses y afinidad de programa para el taller de grado once.",
+    url: ""
+  }
+];
+
+/* ============================================================
+   De aquí en adelante no hace falta modificar nada
+   ============================================================ */
+
+const form    = document.getElementById("formulario");
+const portal  = document.getElementById("portal");
+const aviso   = document.getElementById("aviso");
+const btn     = document.getElementById("btn-entrar");
+const contApps= document.getElementById("apps");
+
+function mostrarAviso(texto, tipo = "error") {
+  aviso.textContent = texto;
+  aviso.className = "aviso " + tipo;
+}
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  document.getElementById("form-login").style.display = "none";
+  mostrarAviso("El acceso todavía no está configurado. Complete SUPABASE_URL y SUPABASE_ANON_KEY en acceso.html.", "info");
+} else {
+  let createClient;
+  try {
+    ({ createClient } = await import("https://esm.sh/@supabase/supabase-js@2"));
+  } catch (e) {
+    document.getElementById("form-login").style.display = "none";
+    mostrarAviso("No se pudo cargar el servicio de autenticación. Revise su conexión e intente de nuevo.");
+    throw e;
+  }
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function pintarApps() {
+    contApps.innerHTML = "";
+    APLICACIONES.forEach((app, i) => {
+      const a = document.createElement("a");
+      a.className = "app";
+      if (app.url) {
+        a.href = app.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+      } else {
+        a.setAttribute("aria-disabled", "true");
+        a.href = "#";
+      }
+      a.innerHTML = '<span class="cifra">' + String(i + 1).padStart(2, "0") + '</span><div><h2>' + app.nombre + "</h2><p>" +
+        (app.url ? app.descripcion : "Pendiente de configurar la dirección de esta herramienta.") + "</p></div>";
+      contApps.appendChild(a);
+    });
+  }
+
+  function abrirPortal(sesion) {
+    form.style.display = "none";
+    portal.classList.add("visible");
+    document.getElementById("sesion-usuario").textContent = "Sesión iniciada como " + sesion.user.email;
+    pintarApps();
+  }
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) abrirPortal(session);
+
+  document.getElementById("form-login").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "Verificando…";
+    aviso.className = "aviso";
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: document.getElementById("correo").value.trim(),
+      password: document.getElementById("clave").value
+    });
+
+    btn.disabled = false;
+    btn.textContent = "Entrar";
+
+    if (error) {
+      mostrarAviso("No pudimos validar esos datos. Revise el correo y la contraseña, o solicite un restablecimiento.");
+      return;
+    }
+    abrirPortal(data.session);
+  });
+
+  document.getElementById("btn-salir").addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    location.reload();
+  });
+}
+</script>
+</body>
+</html>

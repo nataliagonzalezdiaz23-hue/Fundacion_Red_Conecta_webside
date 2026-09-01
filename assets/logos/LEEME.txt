@@ -1,0 +1,13 @@
+LOGOTIPOS DE INSTITUCIONES ALIADAS
+
+Archivos en uso (PNG con fondo transparente, 640 px de ancho):
+
+  politecnico-grancolombiano.png
+  ie-pablo-neruda.png
+  griky.png
+  fundacion-fernando-murillo.png
+
+Para reemplazar alguno, deje el archivo nuevo con el mismo nombre.
+
+El de I.E. Pablo Neruda se generó a partir de una imagen de 226 px, así que es el menos nítido
+del conjunto. Si el colegio tiene el logo en vector o en alta resolución, vale la pena pedirlo.

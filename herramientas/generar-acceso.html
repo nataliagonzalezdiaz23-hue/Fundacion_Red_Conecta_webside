@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Generar bloque de acceso — Fundación Red Conecta</title>
+<style>
+  :root{--tinta:#003366;--turquesa:#00CED1;--acero:#708090;--nube:#F1F5F9;--coral:#FF7F50}
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:clamp(1.5rem,5vw,4rem);background:var(--nube);color:#2E4053;
+    font-family:'Montserrat',system-ui,sans-serif;font-size:15px;line-height:1.6;
+  }
+  .caja{max-width:760px;margin-inline:auto;background:#fff;padding:clamp(1.5rem,4vw,3rem);border:1px solid rgba(112,128,144,.3)}
+  h1{font-size:1.35rem;color:var(--tinta);margin:0 0 .5rem;letter-spacing:-.01em}
+  .lead{margin:0 0 2rem;color:var(--acero);font-size:.92rem}
+  h2{font-size:.78rem;font-weight:600;letter-spacing:.05em;color:var(--tinta);margin:2rem 0 .9rem;padding-top:1rem;border-top:1px solid rgba(112,128,144,.3)}
+  label{display:block;font-size:.72rem;font-weight:600;color:var(--acero);margin:0 0 .35rem}
+  input{width:100%;padding:.6rem .7rem;border:1px solid rgba(112,128,144,.45);font:inherit;font-size:.92rem;margin-bottom:1rem;background:#fff}
+  input:focus{outline:none;border-color:var(--turquesa)}
+  .par{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:600px){.par{grid-template-columns:1fr}}
+  .app{border-left:3px solid var(--turquesa);padding-left:1rem;margin-bottom:1.5rem}
+  button{
+    width:100%;padding:.85rem;border:0;background:var(--tinta);color:#fff;
+    font:inherit;font-weight:600;font-size:.88rem;cursor:pointer;margin-top:1rem;
+  }
+  button:hover{background:#00203F}
+  textarea{
+    width:100%;min-height:220px;margin-top:1.5rem;padding:1rem;
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.72rem;line-height:1.5;
+    border:1px solid rgba(112,128,144,.45);background:#fbfcfd;resize:vertical;
+  }
+  .nota{margin-top:1rem;padding-left:.9rem;border-left:2px solid var(--coral);font-size:.85rem;color:var(--acero)}
+  .ok{border-left-color:var(--turquesa);color:var(--tinta)}
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Generar bloque de acceso</h1>
+  <p class="lead">Sirve para cambiar el usuario, la contraseña o las direcciones de las herramientas internas. Todo se calcula en este navegador; nada se envía a ningún servidor.</p>
+
+  <h2>Credenciales</h2>
+  <div class="par">
+    <div>
+      <label for="u">Usuario</label>
+      <input id="u" type="text" value="equipo" spellcheck="false">
+    </div>
+    <div>
+      <label for="c">Contraseña</label>
+      <input id="c" type="text" placeholder="Escriba la contraseña nueva" spellcheck="false">
+    </div>
+  </div>
+
+  <h2>Herramientas</h2>
+
+  <div class="app">
+    <label>Nombre</label><input class="n" type="text" value="Pruebas psicométricas">
+    <label>Descripción</label><input class="de" type="text" value="Aplicación y consolidado de los instrumentos de preselección.">
+    <label>Dirección</label><input class="ur" type="text" value="https://evaluacion-vocacional.vercel.app/" spellcheck="false">
+    <label>Imagen</label><input class="im" type="text" value="assets/apps/pruebas.jpg" spellcheck="false">
+  </div>
+
+  <div class="app">
+    <label>Nombre</label><input class="n" type="text" value="Orientación vocacional">
+    <label>Descripción</label><input class="de" type="text" value="Exploración de intereses y afinidad de programa durante el taller de grado once.">
+    <label>Dirección</label><input class="ur" type="text" value="https://vocacional-skills.vercel.app/" spellcheck="false">
+    <label>Imagen</label><input class="im" type="text" value="assets/apps/orientacion.jpg" spellcheck="false">
+  </div>
+
+  <div class="app">
+    <label>Nombre</label><input class="n" type="text" value="Entrevistas familiares">
+    <label>Descripción</label><input class="de" type="text" value="Registro de la visita domiciliaria, valoración y acta con consentimiento firmado.">
+    <label>Dirección</label><input class="ur" type="text" value="https://entrevistas-familiares.vercel.app/" spellcheck="false">
+    <label>Imagen</label><input class="im" type="text" value="assets/apps/entrevistas.jpg" spellcheck="false">
+  </div>
+
+  <button id="generar" type="button">Generar el bloque</button>
+
+  <textarea id="salida" readonly placeholder="Aquí aparecerá el bloque que debe pegar en acceso.html"></textarea>
+  <p class="nota" id="nota">Copie el resultado y reemplace en <b>acceso.html</b> las siete líneas que empiezan en <b>const BOVEDA = {</b> y terminan en <b>};</b></p>
+</div>
+
+<script type="module">
+const b64 = a => btoa(String.fromCharCode(...new Uint8Array(a)));
+
+document.getElementById('generar').addEventListener('click', async () => {
+  const usuario = document.getElementById('u').value;
+  const clave   = document.getElementById('c').value;
+  const nota    = document.getElementById('nota');
+
+  if (!usuario.trim() || !clave) {
+    nota.className = 'nota';
+    nota.innerHTML = 'Falta el usuario o la contraseña.';
+    return;
+  }
+
+  const apps = [...document.querySelectorAll('.app')].map(d => ({
+    nombre:      d.querySelector('.n').value,
+    descripcion: d.querySelector('.de').value,
+    url:         d.querySelector('.ur').value.trim(),
+    imagen:      d.querySelector('.im').value.trim()
+  })).filter(a => a.url);
+
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv   = crypto.getRandomValues(new Uint8Array(12));
+
+  const material = await crypto.subtle.importKey("raw",
+    new TextEncoder().encode(usuario.toLowerCase().trim() + ":" + clave),
+    "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt, iterations:200000, hash:"SHA-256" },
+    material, { name:"AES-GCM", length:256 }, false, ["encrypt"]);
+  const datos = await crypto.subtle.encrypt({ name:"AES-GCM", iv }, key,
+    new TextEncoder().encode(JSON.stringify(apps)));
+
+  document.getElementById('salida').value =
+    'const BOVEDA = {\n' +
+    '  s: "' + b64(salt) + '",\n' +
+    '  i: "' + b64(iv) + '",\n' +
+    '  d: "' + b64(datos) + '"\n' +
+    '};';
+
+  nota.className = 'nota ok';
+  nota.innerHTML = 'Listo. Copie el resultado y reemplace en <b>acceso.html</b> las líneas que empiezan en <b>const BOVEDA = {</b> y terminan en <b>};</b>. Guarde la contraseña en un lugar seguro: no queda registrada en ninguna parte y sin ella no se pueden recuperar las direcciones.';
+});
+</script>
+</body>
+</html>

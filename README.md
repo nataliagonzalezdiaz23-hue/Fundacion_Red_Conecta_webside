@@ -47,54 +47,47 @@ emite el certificado HTTPS automáticamente.
 
 ---
 
-## 3. Configurar el acceso al área interna
+## 3. Acceso al área interna
 
-El login usa **Supabase Auth**, el mismo proyecto que ya tenía previsto para sincronizar las entrevistas.
+`acceso.html` pide usuario y contraseña. Las credenciales iniciales son:
 
-1. En [supabase.com](https://supabase.com) cree un proyecto (plan gratuito).
-2. **Authentication → Providers → Email**: deje activado el correo y **desactive** el registro
-   público (*Allow new users to sign up*). Los usuarios se crean a mano.
-3. **Authentication → Users → Add user**: cree una cuenta por cada persona autorizada.
-4. **Project Settings → API**: copie `Project URL` y la clave `anon public`.
-5. Abra `acceso.html` y complete el bloque de configuración al inicio del `<script>`:
-
-```js
-const SUPABASE_URL      = "https://xxxxxxxx.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOi...";
-
-const APLICACIONES = [
-  { nombre: "Entrevistas familiares", descripcion: "...", url: "https://entrevistas-red-conecta.vercel.app" },
-  ...
-];
+```
+Usuario:     equipo
+Contraseña:  RedConecta2027
 ```
 
-La clave `anon public` está diseñada para ir en el navegador; no es un secreto. Lo que protege los
-datos son las políticas de la base, no ocultar la clave.
+**Cámbielas antes de compartirlas con alguien.** Abra `herramientas/generar-acceso.html` en el
+navegador, escriba el usuario y la contraseña nuevos, presione *Generar el bloque* y reemplace en
+`acceso.html` las líneas que van de `const BOVEDA = {` hasta `};`. Desde ahí se pueden cambiar
+también los nombres y las direcciones de las herramientas.
 
----
+La contraseña no queda escrita en ninguna parte del sitio. Lo que viaja en el archivo es el listado
+de herramientas cifrado con AES-GCM, con la clave derivada de usuario y contraseña mediante PBKDF2
+(200.000 iteraciones). Sin la contraseña correcta no se pueden leer las direcciones, ni siquiera
+mirando el código fuente de la página. Si pierde la contraseña, las direcciones no se recuperan:
+hay que volver a generar el bloque con la herramienta.
 
-## 4. Punto crítico de seguridad
+La sesión dura mientras la pestaña esté abierta. Al cerrarla, vuelve a pedir la contraseña.
 
-**El portal solo muestra enlaces. No protege las aplicaciones.**
+### Hasta dónde llega esta protección
 
-Si alguien conoce la dirección directa de la aplicación de entrevistas, entra sin pasar por el login.
-Para cerrar ese hueco hacen falta dos cosas:
+Sirve para que el área interna no sea pública y no aparezca en buscadores. No es una barrera contra
+alguien con conocimientos técnicos y una copia de la contraseña, porque todo el descifrado ocurre en
+el navegador. Y, sobre todo, **no protege las aplicaciones en sí**: quien conozca la dirección
+directa de la app de entrevistas entra sin pasar por aquí.
 
-1. **Cada aplicación debe verificar la sesión al abrirse.** Al inicio de cada app, consultar
-   `supabase.auth.getSession()` y, si no hay sesión, redirigir al login en lugar de mostrar la
-   interfaz. Es el mismo bloque de código en las tres.
-2. **Row Level Security activada en Supabase.** Cada tabla con datos de estudiantes debe tener RLS
-   encendida y una política que exija usuario autenticado. Sin esto, cualquiera con la clave `anon`
-   puede leer la tabla completa desde la consola del navegador.
+Para cerrar eso hacen falta dos cosas, que siguen pendientes:
 
-La sesión se guarda por dominio. Si las aplicaciones viven en dominios distintos
-(`entrevistas-xxx.vercel.app` y `redconecta.org`), cada una pedirá login por separado. Para una sola
-sesión compartida, publíquelas como subdominios del dominio propio: `entrevistas.redconecta.org`,
-`vocacional.redconecta.org`.
+1. **Que cada aplicación verifique la sesión al abrirse**, en lugar de mostrar la interfaz a
+   cualquiera que llegue con la dirección.
+2. **Row Level Security activada en Supabase**, para que las tablas con datos de estudiantes exijan
+   usuario autenticado. Sin esto, cualquiera con la clave `anon` puede leer la tabla completa desde
+   la consola del navegador.
 
----
+Cuando quiera dar ese paso, Supabase Auth con una cuenta por persona reemplaza este mecanismo y
+resuelve las dos cosas a la vez.
 
-## 5. Fotografías y logotipos
+## 4. Fotografías y logotipos
 
 Los espacios de imagen ya están montados y funcionan solos: mientras el archivo no exista, se ve un
 marco gris con el nombre y la medida que se necesita; en cuanto usted deje la foto con ese nombre
@@ -104,19 +97,19 @@ Las imágenes ya están montadas. Para cambiar cualquiera, deje el archivo nuevo
 
 | Archivo | Medida | Dónde aparece |
 |---|---|---|
-| `assets/fotos/apertura.jpg` | 1800 × 771 | Banda ancha bajo la portada |
-| `assets/fotos/proceso.jpg` | 1800 × 771 | Banda ancha antes de "Alianzas" |
-| `assets/fotos/equipo.jpg` | 900 × 1200 | Vertical, junto a "Quiénes somos" |
-| `assets/fotos/galeria-1..3.jpg` | 1000 × 667 | Sección "El programa" |
+| `assets/fotos/apertura.jpg` | 2400 × 1029 | Banda ancha bajo la portada |
+| `assets/fotos/proceso.jpg` | 2200 × 943 | Banda ancha antes de "Alianzas" |
+| `assets/fotos/equipo.jpg` | 1200 × 1600 | Vertical, junto a "Quiénes somos" |
+| `assets/fotos/galeria-1..3.jpg` | 1400 × 933 | Sección "El programa" |
 | `assets/fotos/compartir.jpg` | 1200 × 630 | Vista previa al compartir el enlace |
 | `assets/logos/politecnico-grancolombiano.png` | 640 px | Franja de aliados |
 | `assets/logos/ie-pablo-neruda.png` | 640 px | Franja de aliados |
 | `assets/logos/griky.png` | 640 px | Franja de aliados |
 | `assets/logos/fundacion-fernando-murillo.png` | 640 px | Franja de aliados |
 
-**Resolución.** Las fotos entregadas venían a unos 500 px de ancho, el tamaño de vista previa de los
-bancos de imágenes. Para las bandas anchas hubo que ampliarlas, así que en pantalla grande se ven
-algo suaves. Con los originales a resolución completa la nitidez mejora de inmediato.
+Todas las imágenes provienen de originales a resolución completa, así que se ven nítidas en
+cualquier pantalla. Las bandas anchas se comprimieron a calidad media para que la página cargue
+rápido en conexiones móviles.
 
 **Antes de publicar fotos con estudiantes.** El acuerdo de vinculación incluye una casilla de
 autorización de uso de imagen. Publique únicamente fotos de quienes la hayan marcado y, tratándose
@@ -126,7 +119,7 @@ acompañe una foto con el nombre completo de un menor.
 
 Un espacio que no vaya a llenarse debe borrarse del HTML, no dejarse con el marcador visible.
 
-## 6. Sistema visual
+## 5. Sistema visual
 
 La dirección de diseño es editorial y tipográfica: retícula de doce columnas visible mediante reglas
 de un pixel, tipografía de gran escala como elemento principal, y color usado como acontecimiento
@@ -143,7 +136,7 @@ puntual en vez de decoración distribuida.
 - Una sola animación en toda la página: la entrada del titular y el trazo de la regla al cargar.
   Se desactiva sola si el sistema operativo pide movimiento reducido.
 
-## 7. Mantenimiento
+## 6. Mantenimiento
 
 Todo el contenido está en HTML plano, con el texto legible dentro del archivo. Para cambiar una
 sección, edite el párrafo directamente. Las ocho etapas del proceso viven en el arreglo `ETAPAS`

@@ -136,13 +136,13 @@ footer a:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
   <div class="hoja">
 
     <!-- ---------- formulario ---------- -->
-    <section class="tarjeta" id="formulario" style="display:none">
+    <section class="tarjeta" id="formulario">
       <h1>Acceso al equipo</h1>
       <p class="sub">Esta área contiene información de estudiantes y familias. El acceso está restringido a personas autorizadas por la Fundación.</p>
 
       <form id="form-login" autocomplete="on">
-        <label for="correo">Correo institucional</label>
-        <input id="correo" name="email" type="email" required autocomplete="username">
+        <label for="correo">Usuario</label>
+        <input id="correo" name="usuario" type="text" required autocomplete="username" spellcheck="false">
         <label for="clave">Contraseña</label>
         <input id="clave" name="password" type="password" required autocomplete="current-password">
         <button class="principal" type="submit" id="btn-entrar">Entrar</button>
@@ -150,7 +150,7 @@ footer a:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
 
       <div class="aviso" id="aviso" role="status"></div>
 
-      <p class="pie-form">¿Olvidaste tu contraseña? Escribe a <a href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
+      <p class="pie-form">¿No tienes la contraseña? Escribe a <a href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
     </section>
 
     <!-- ---------- portal ---------- -->
@@ -180,38 +180,21 @@ footer a:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
 
 <script type="module">
 /* ============================================================
-   CONFIGURACIÓN
+   ACCESO
+   Los datos de las herramientas viajan cifrados dentro de esta
+   misma página. Sin la contraseña no se pueden leer, ni siquiera
+   mirando el código fuente.
+
+   Para cambiar el usuario, la contraseña o las direcciones,
+   abra el archivo herramientas/generar-acceso.html en su
+   navegador y reemplace el bloque BOVEDA con lo que le genere.
    ============================================================ */
 
-/* Con estas dos líneas vacías, el portal se muestra directo, sin pedir contraseña.
-   Al completarlas con los datos de Supabase, el acceso pasa a exigir inicio de sesión. */
-const SUPABASE_URL      = "";
-const SUPABASE_ANON_KEY = "";
-
-const APLICACIONES = [
-  {
-    nombre: "Pruebas psicométricas",
-    descripcion: "Aplicación y consolidado de los instrumentos de preselección.",
-    url: "https://evaluacion-vocacional.vercel.app/",
-    imagen: "assets/apps/pruebas.jpg"
-  },
-  {
-    nombre: "Orientación vocacional",
-    descripcion: "Exploración de intereses y afinidad de programa durante el taller de grado once.",
-    url: "https://vocacional-skills.vercel.app/",
-    imagen: "assets/apps/orientacion.jpg"
-  },
-  {
-    nombre: "Entrevistas familiares",
-    descripcion: "Registro de la visita domiciliaria, valoración y acta con consentimiento firmado.",
-    url: "https://entrevistas-familiares.vercel.app/",
-    imagen: "assets/apps/entrevistas.jpg"
-  }
-];
-
-/* ============================================================
-   De aquí en adelante no hace falta modificar nada
-   ============================================================ */
+const BOVEDA = {
+  s: "gr32wcEQowf7EhdArPflEA==",
+  i: "M++pkwC7dspLdpnO",
+  d: "YdpG+IGLbkr8eo92XvccL81H2mNZHMN4X4J8gnYgX7EPTxYbI2onGtjX4nZ6tAVbFc5WG0CHdeQWKhJQAjZejBxGaQoEPR7rO0caueRKj8dyfktpXVX3/zx17uuJPbeaEjVGLl0QWM1pJzBnK/ng4lIKGs8oqm6+/dEaTpF50blBubgpIGZ8cmY2oDnpYe3pOz4Ughx/qeE/WsbjY4wNlHWzNJ8zDx8F/BqRFksFOWmokxaU1pYhcX7YAgnoTZ226tjbosl2LG/od/aeBlAOjk5TinSNWOg6VREXn34jBiXn34qib2vTtz3mXhSXdCxaPiGazTK3Lfzp/Sx0B/gqSTsOaOCR3AyzYeymEi9MXbLnh7ASwpAYpWUolJBxJUbEpBpbtgrdnLL4CeR+ljVyO21fVH1co5MAjyAcNVtY2tCYbTTuYKNKO4DMuQdVuI0eZHBRIF0tP++LIYcBNRo3eaNQaXdAxjzJb5LModZ2AHahh5ctaDdzrvPU7+pVjCJcRUQcNqgxNUYNdYVsTHoOTpntCo44K0VOUF1bRZzL6+qyZI/a+hkwIHhwXpOu7TMf37GMCsGsTJEzMO5KODKzzF6H3ErjIzkqUSKQzI6ZlAHiiupwhl+3c+LCpssGez1gFPJ347cR6/oSM6ZpzXMOOvPVCr5DlVbAGk3981nHCPWOlooiPng9rZ/+al8jSZVtfVCq2AGKA0YgeyMwP/IsZsqyvoBWa9nYPj/lXR2ajl295llPEBfivJiC2czN/tAUwI1zLsSTguivJ+u0+4skhcdvkmgO92E8pGvQXTrqn9hop4XZCnXcRD9L3CTf1+of4MVjBWHa6nzFzPSNuAXj8iwt50TQ5v6BrcYN/Sr+HSyyVssrBzxo"
+};
 
 const form     = document.getElementById("formulario");
 const portal   = document.getElementById("portal");
@@ -220,22 +203,28 @@ const btn      = document.getElementById("btn-entrar");
 const contApps = document.getElementById("apps");
 const btnSalir = document.getElementById("btn-salir");
 
-function mostrarAviso(texto, tipo = "error") {
-  aviso.textContent = texto;
-  aviso.className = "aviso " + tipo;
+const bin = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+async function abrirBoveda(usuario, clave) {
+  const material = await crypto.subtle.importKey("raw",
+    new TextEncoder().encode(usuario.toLowerCase().trim() + ":" + clave),
+    "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt: bin(BOVEDA.s), iterations:200000, hash:"SHA-256" },
+    material, { name:"AES-GCM", length:256 }, false, ["decrypt"]);
+  const claro = await crypto.subtle.decrypt(
+    { name:"AES-GCM", iv: bin(BOVEDA.i) }, key, bin(BOVEDA.d));
+  return JSON.parse(new TextDecoder().decode(claro));
 }
 
-function pintarApps() {
+function pintarApps(apps) {
   contApps.innerHTML = "";
-  APLICACIONES.forEach((app, i) => {
+  apps.forEach((app, i) => {
     const a = document.createElement("a");
     a.className = "app";
-    if (app.url) { a.href = app.url; a.target = "_blank"; a.rel = "noopener"; }
-    else { a.href = "#"; a.setAttribute("aria-disabled", "true"); }
-
+    a.href = app.url; a.target = "_blank"; a.rel = "noopener";
     let dominio;
-    try { dominio = new URL(app.url).hostname; } catch (e) { dominio = "Pendiente de configurar"; }
-
+    try { dominio = new URL(app.url).hostname; } catch (e) { dominio = ""; }
     a.innerHTML =
       '<div class="lienzo"><span class="cifra">' + String(i + 1).padStart(2, "0") + '</span>' +
       '<img src="' + app.imagen + '" alt="" onerror="this.style.display=\'none\'"></div>' +
@@ -246,52 +235,48 @@ function pintarApps() {
   });
 }
 
-function abrirPortal(correo) {
+function abrirPortal(apps, usuario) {
   form.style.display = "none";
   portal.classList.add("visible");
-  if (correo) {
-    document.getElementById("sesion-usuario").textContent = "Sesión iniciada como " + correo;
-    btnSalir.style.display = "block";
-  }
-  pintarApps();
+  document.getElementById("sesion-usuario").textContent = "Sesión iniciada como " + usuario;
+  btnSalir.style.display = "block";
+  pintarApps(apps);
 }
 
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  abrirPortal(null);
-} else {
-  form.style.display = "block";
-  let createClient;
+/* sesión de la pestaña: evita repetir la contraseña al navegar */
+const guardada = sessionStorage.getItem("rc_sesion");
+if (guardada) {
   try {
-    ({ createClient } = await import("https://esm.sh/@supabase/supabase-js@2"));
-  } catch (e) {
-    document.getElementById("form-login").style.display = "none";
-    mostrarAviso("No se pudo cargar el servicio de autenticación. Revisa tu conexión e intenta de nuevo.");
-    throw e;
-  }
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const { data: { session } } = await supabase.auth.getSession();
-  if (session) abrirPortal(session.user.email);
-
-  document.getElementById("form-login").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    btn.disabled = true; btn.textContent = "Verificando…"; aviso.className = "aviso";
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: document.getElementById("correo").value.trim(),
-      password: document.getElementById("clave").value
-    });
-
-    btn.disabled = false; btn.textContent = "Entrar";
-    if (error) { mostrarAviso("No pudimos validar esos datos. Revisa el correo y la contraseña, o solicita un restablecimiento."); return; }
-    abrirPortal(data.session.user.email);
-  });
-
-  btnSalir.addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    location.reload();
-  });
+    const { usuario, apps } = JSON.parse(guardada);
+    abrirPortal(apps, usuario);
+  } catch (e) { sessionStorage.removeItem("rc_sesion"); }
 }
+
+document.getElementById("form-login").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const usuario = document.getElementById("correo").value;
+  const clave   = document.getElementById("clave").value;
+
+  btn.disabled = true; btn.textContent = "Verificando…";
+  aviso.className = "aviso";
+
+  try {
+    const apps = await abrirBoveda(usuario, clave);
+    sessionStorage.setItem("rc_sesion", JSON.stringify({ usuario: usuario.trim(), apps }));
+    abrirPortal(apps, usuario.trim());
+  } catch (err) {
+    aviso.textContent = "Usuario o contraseña incorrectos.";
+    aviso.className = "aviso error";
+    document.getElementById("clave").value = "";
+  } finally {
+    btn.disabled = false; btn.textContent = "Entrar";
+  }
+});
+
+btnSalir.addEventListener("click", () => {
+  sessionStorage.removeItem("rc_sesion");
+  location.reload();
+});
 </script>
 </body>
 </html>

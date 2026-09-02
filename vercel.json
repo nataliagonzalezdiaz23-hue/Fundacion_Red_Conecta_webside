@@ -11,7 +11,14 @@
       ]
     },
     {
-      "source": "/(acceso|herramientas/(.*))",
+      "source": "/acceso",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, must-revalidate" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/herramientas/:ruta*",
       "headers": [
         { "key": "Cache-Control", "value": "no-store, must-revalidate" },
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }

@@ -13,15 +13,13 @@ robots.txt      Excluye /acceso de los buscadores
 
 ---
 
-## 1. Antes de publicar: completar los marcadores
+## 1. Datos de contacto
 
 Busque los corchetes en `index.html` y reemplácelos:
 
-| Marcador | Dónde aparece |
-|---|---|
-| `[correo institucional]` | Protección de datos, contacto, pie de acceso |
-| `[teléfono]` | Contacto |
-| `[Ciudad]` | Portada, contacto |
+Los datos de contacto ya están puestos: fundacionredconecta@gmail.com, +57 313 401 1695 y
+Bogotá, Colombia. Aparecen en la portada, en "Protección de datos", en "Hablemos" y en la
+página de acceso.
 
 Los datos de identificación de la entidad (NIT, representante legal, domicilio fiscal) no aparecen
 en el sitio. Cuando decida publicarlos, el lugar natural es la sección "Protección de datos" o el

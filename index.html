@@ -65,15 +65,15 @@ a{color:inherit}
 
 /* ---------------- cabecera ---------------- */
 .cabecera{
-  position:sticky;top:0;z-index:60;background:var(--tinta);
-  border-bottom:1px solid var(--hilo-claro);
+  position:sticky;top:0;z-index:60;background:#00203F;
+  border-bottom:1px solid rgba(0,206,209,.35);
 }
-.cabecera .fila{display:flex;align-items:center;gap:2rem;height:68px;max-width:1560px;margin-inline:auto}
-.cabecera img{height:30px;width:auto}
+.cabecera .fila{display:flex;align-items:center;gap:2rem;height:88px;max-width:1560px;margin-inline:auto}
+.cabecera img{height:42px;width:auto}
 .nav{margin-left:auto;display:flex;align-items:center;gap:2rem}
 .nav a{
-  font-family:var(--sans);font-size:.76rem;font-weight:500;letter-spacing:.03em;
-  color:rgba(255,255,255,.72);text-decoration:none;padding-block:.4rem;
+  font-family:var(--sans);font-size:.83rem;font-weight:500;letter-spacing:.02em;
+  color:rgba(255,255,255,.92);text-decoration:none;padding-block:.4rem;
   border-bottom:1px solid transparent;
 }
 .nav a:hover{color:#fff;border-bottom-color:var(--turquesa)}
@@ -87,7 +87,7 @@ a{color:inherit}
 /* ---------------- portada ---------------- */
 .portada{
   background:var(--tinta);color:#fff;
-  min-height:calc(100svh - 68px);display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:calc(100svh - 88px);display:flex;flex-direction:column;justify-content:flex-end;
   padding-block:clamp(4rem,12vh,8rem) clamp(1.5rem,4vh,2.5rem);
 }
 .titular{
@@ -130,11 +130,11 @@ a{color:inherit}
 .seccion{border-top:1px solid var(--hilo);padding-block:clamp(3.5rem,8vw,7rem)}
 .seccion.oscura{background:var(--tinta);color:#fff;border-top-color:transparent}
 .seccion.suave{background:var(--nube)}
-.rotulo{position:sticky;top:98px;align-self:start}
+.rotulo{position:sticky;top:118px;align-self:start}
 @media(max-width:900px){.rotulo{position:static;margin-bottom:2rem}}
 .rotulo h2{
-  font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--tinta);
-  margin:0 0 .6rem;letter-spacing:-.005em;
+  font-family:var(--sans);font-size:1.28rem;font-weight:600;color:var(--tinta);
+  margin:0 0 .75rem;letter-spacing:-.012em;line-height:1.25;
 }
 .oscura .rotulo h2{color:#fff}
 .oscura .meta{color:rgba(255,255,255,.5)}
@@ -235,7 +235,7 @@ h3{
 /* ---------------- contacto ---------------- */
 .correo{
   display:inline-block;font-family:var(--serif);font-weight:400;text-decoration:none;
-  font-size:clamp(1.5rem,5.2vw,4rem);line-height:1.05;letter-spacing:-.03em;
+  font-size:clamp(1.25rem,3.5vw,2.75rem);line-height:1.1;letter-spacing:-.025em;
   color:#fff;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:.1em;
   word-break:break-word;
 }
@@ -293,7 +293,7 @@ figcaption{
 .logos{display:grid;grid-template-columns:repeat(4,1fr);column-gap:var(--canal);row-gap:1.25rem;margin-top:1.5rem}
 .logos figure{margin:0}
 .logos .marco{aspect-ratio:3/2;background:none;border:0}
-.logos figcaption{margin-top:.7rem;color:var(--tinta);font-weight:600}
+.logos figcaption{margin-top:.9rem;color:var(--tinta);font-weight:600;text-align:center}
 .logos .pauta{font-size:.66rem;padding:.7rem;gap:.2rem}
 .logos .pauta b{font-size:.66rem;word-break:break-all}
 .logos img{object-fit:contain;padding:.5rem 1.25rem}
@@ -340,7 +340,7 @@ figcaption{
         <p>Identificamos estudiantes de grado once en instituciones educativas públicas, gestionamos con universidades aliadas los apoyos que hacen viable su ingreso, y los acompañamos hasta que se gradúan.</p>
       </div>
       <div class="bloque">
-        <p class="meta">Entidad sin ánimo de lucro<br>[Ciudad], Colombia</p>
+        <p class="meta">Entidad sin ánimo de lucro<br>Bogotá, Colombia</p>
       </div>
     </div>
   </div>
@@ -556,7 +556,7 @@ figcaption{
       </div>
       <div class="col-texto">
         <p class="entradilla">Recolectamos y tratamos datos personales conforme a la Ley 1581 de 2012 y al Decreto 1377 de 2013. La participación de cualquier estudiante requiere consentimiento informado del acudiente, y la información individual se comparte con instituciones aliadas únicamente con autorización previa y bajo el principio de minimización de datos.</p>
-        <p class="parrafo">Para consultar, actualizar o suprimir sus datos, o para solicitar copia de nuestra política de tratamiento de la información, escriba a [correo institucional].</p>
+        <p class="parrafo">Para consultar, actualizar o suprimir sus datos, o para solicitar copia de nuestra política de tratamiento de la información, escriba a <a href="mailto:fundacionredconecta@gmail.com" style="color:var(--tinta)">fundacionredconecta@gmail.com</a>.</p>
       </div>
     </div>
   </div>
@@ -595,15 +595,15 @@ figcaption{
       </div>
       <div class="col-texto">
         <p class="entradilla">Si representa a una universidad, a una institución educativa o a una organización que trabaja con población escolar, una reunión de cuarenta minutos basta para saber si tiene sentido seguir.</p>
-        <a class="correo" href="mailto:[correo institucional]">[correo institucional]</a>
+        <a class="correo" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>
         <div class="tercios" style="margin-top:3rem">
           <div style="border-top-color:var(--hilo-claro)">
             <h4 style="color:#fff">Teléfono</h4>
-            <p style="color:rgba(255,255,255,.75)">[teléfono]</p>
+            <p style="color:rgba(255,255,255,.75)">+57 313 401 1695</p>
           </div>
           <div style="border-top-color:var(--hilo-claro)">
             <h4 style="color:#fff">Ubicación</h4>
-            <p style="color:rgba(255,255,255,.75)">[Ciudad], Colombia</p>
+            <p style="color:rgba(255,255,255,.75)">Bogotá, Colombia</p>
           </div>
           <div style="border-top-color:var(--hilo-claro)">
             <h4 style="color:#fff">Equipo</h4>

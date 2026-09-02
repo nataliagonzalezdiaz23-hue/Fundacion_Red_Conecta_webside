@@ -302,6 +302,55 @@ figcaption{
 /* retrato dentro de la retícula */
 .retrato{margin-top:2.5rem}
 .retrato .marco{aspect-ratio:3/4}
+
+/* ---------------- valores discretos ---------------- */
+.bloque-valores{margin-top:3.5rem;padding-top:1.25rem;border-top:1px solid var(--hilo)}
+.valores-min{
+  display:grid;grid-template-columns:repeat(3,1fr);column-gap:var(--canal);row-gap:1.5rem;
+  margin-top:1.4rem;
+}
+@media(max-width:820px){.valores-min{grid-template-columns:1fr;row-gap:1.25rem}}
+.valores-min h4{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--tinta);margin:0 0 .35rem}
+.valores-min p{margin:0;font-size:.88rem;line-height:1.55;color:var(--acero)}
+.rotulo-min{
+  font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.09em;
+  color:var(--acero);margin:0;
+}
+
+/* ---------------- bloque desplegable ---------------- */
+details.mas{margin-top:2.5rem;border-top:1px solid var(--hilo)}
+.turquesa details.mas{border-top-color:rgba(0,50,58,.28)}
+details.mas summary{
+  list-style:none;cursor:pointer;padding:1.1rem 0;
+  font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--tinta);
+  display:flex;align-items:center;gap:.7rem;
+}
+details.mas summary::-webkit-details-marker{display:none}
+details.mas summary::before{
+  content:"+";display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border:1px solid currentColor;font-weight:400;font-size:.95rem;line-height:1;
+}
+details.mas[open] summary::before{content:"–"}
+.turquesa details.mas summary{color:#00323a}
+details.mas .contenido{padding-bottom:1.5rem;max-width:62ch}
+details.mas .contenido h5{
+  font-family:var(--sans);font-size:.78rem;font-weight:600;margin:1.6rem 0 .5rem;
+  color:var(--tinta);letter-spacing:.01em;
+}
+.turquesa details.mas .contenido h5{color:#00323a}
+details.mas .contenido h5:first-child{margin-top:0}
+details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
+
+/* enlace dentro de textos */
+.enlace-texto{color:inherit;border-bottom:1px solid currentColor;text-decoration:none;padding-bottom:1px}
+.enlace-texto:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
+.turquesa .enlace-texto:hover{color:#003d47;border-bottom-color:#003d47}
+
+/* etiqueta transversal en la tira */
+.tira .marca{
+  display:block;font-size:.6rem;font-weight:700;letter-spacing:.09em;
+  color:var(--turquesa);margin-top:.4rem;
+}
 </style>
 </head>
 <body>
@@ -313,16 +362,15 @@ figcaption{
       <nav class="nav">
         <a href="#quienes">Quiénes somos</a>
         <a href="#operamos">Cómo operamos</a>
-        <a href="#alianzas">Alianzas</a>
-        <a href="#galeria">El programa</a>
+        <a href="#colegios">Colegios</a>
+        <a href="#universidades">Universidades</a>
+        <a href="#circulo">Contribución</a>
         <a href="#contacto">Contacto</a>
         <a class="acceso" href="acceso.html">Acceso</a>
       </nav>
     </div>
   </div>
 </header>
-
-<main id="inicio">
 
 <!-- ============ PORTADA ============ -->
 <section class="portada">
@@ -359,17 +407,20 @@ figcaption{
       <div class="col-rotulo rotulo">
         <h2>Quiénes somos</h2>
         <p class="meta">Orientación, acompañamiento<br>y articulación institucional</p>
+
         <div class="retrato"><figure class="marco "><img src="assets/fotos/equipo.jpg" alt="Entrevista de acompañamiento con una familia" onerror="this.closest('.marco').classList.add('vacio')"><span class="pauta"><b>assets/fotos/equipo.jpg</b>1200 × 1600 px · vertical</span></figure></div>
       </div>
       <div class="col-texto">
-        <p class="entradilla">Trabajamos sobre el tramo donde se pierde a la mayoría: los últimos meses de grado once y los primeros semestres de educación superior.</p>
-        <p class="parrafo">Fundación Red Conecta promueve el acceso, la permanencia y la proyección educativa y laboral de estudiantes con talento y oportunidades económicas limitadas. En los colegios públicos hay jóvenes con capacidad de sobra para una carrera universitaria que nunca llegan a matricularse, no por falta de mérito, sino por falta de ruta.</p>
+        <p class="entradilla">La suerte es la suma de oportunidad y esfuerzo. El esfuerzo ya lo ponen ellos; nosotros trabajamos sobre la otra mitad.</p>
+        <p class="parrafo">Fundación Red Conecta articula colegios públicos con instituciones de educación superior para que el talento que ya existe en las aulas encuentre por dónde salir. Identificamos estudiantes de grado once con capacidad y determinación, gestionamos con universidades aliadas los beneficios que hacen viable su ingreso, y los acompañamos hasta que se gradúan.</p>
+        <p class="parrafo">En los colegios oficiales hay jóvenes con capacidad de sobra para una carrera universitaria que nunca llegan a matricularse. No por falta de mérito: por falta de ruta. Nuestro trabajo es construir esa ruta y caminarla con ellos.</p>
 
         <h3>Lo que no hacemos</h3>
         <p class="parrafo">La Fundación no imparte educación formal ni no formal, y no otorga títulos ni certificaciones académicas. Nuestra actuación se enmarca en la educación informal: orientación, mentoría, acompañamiento y seguimiento, complementarios a los procesos de las instituciones legalmente autorizadas. No reemplazamos funciones académicas, administrativas ni de bienestar de las universidades aliadas.</p>
 
-        <h3>Nuestros valores</h3>
-        <div class="tercios">
+        <div class="bloque-valores">
+        <p class="rotulo-min">Nuestros valores</p>
+        <div class="valores-min">
           <div>
             <h4>Equidad y mérito</h4>
             <p>Nivelamos el campo de juego para que el esfuerzo sea el único límite del éxito.</p>
@@ -382,6 +433,7 @@ figcaption{
             <h4>Transparencia</h4>
             <p>Solidez institucional que garantiza que cada inversión social genere un impacto real.</p>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -404,11 +456,11 @@ figcaption{
     <div class="malla">
       <div class="col-rotulo rotulo">
         <h2>Cómo operamos</h2>
-        <p class="meta">Ocho etapas, del primer convenio al cierre de cohorte. Seleccione una para ver el detalle.</p>
+        <p class="meta">Ocho etapas, del primer convenio a la graduación. Selecciona una para ver el detalle.</p>
       </div>
       <div class="col-texto">
-        <p class="entradilla">Cada etapa tiene un objetivo, una salida mínima verificable y una puerta de decisión.</p>
-        <p class="parrafo">Ese diseño permite documentar por qué entra cada estudiante al programa y sostener el criterio cuando el proceso se amplía a más colegios.</p>
+        <p class="entradilla">Articulamos el talento de los colegios con los beneficios de las universidades, a través de un proceso de reconocimiento, orientación y selección.</p>
+        <p class="parrafo">Cada etapa deja evidencia documentada, de modo que siempre se puede explicar por qué un estudiante entró al programa y qué necesita para sostenerse en él.</p>
       </div>
       <div class="col-ancho">
         <div class="tira" id="tira" role="tablist" aria-label="Etapas del proceso"></div>
@@ -424,24 +476,62 @@ figcaption{
   </div>
 </section>
 
-
 <!-- ============ IMAGEN DEL PROCESO ============ -->
 <section class="banda">
   <figure class="marco "><img src="assets/fotos/proceso.jpg" alt="Estudiantes caminando por el campus de una universidad" onerror="this.closest('.marco').classList.add('vacio')"><span class="pauta"><b>assets/fotos/proceso.jpg</b>2400 × 1030 px · horizontal</span></figure>
 </section>
 
-<!-- ============ ALIANZAS ============ -->
-<section class="seccion suave" id="alianzas">
+<!-- ============ COLEGIOS ============ -->
+<section class="seccion suave" id="colegios">
   <div class="hoja">
     <div class="malla">
       <div class="col-rotulo rotulo">
-        <h2>Alianzas</h2>
-        <p class="meta">Instituciones de educación media que abren el campo de intervención, e instituciones de educación superior que abren la puerta de salida.</p>
+        <h2>Colegios</h2>
+        <p class="meta">Instituciones de educación media que abren el campo de intervención</p>
+      </div>
+      <div class="col-texto">
+        <p class="entradilla">Intervenimos en grado once durante los últimos tres meses del calendario escolar, con un taller de doce semanas que incluye medición de entrada, trabajo experiencial y medición de salida.</p>
+
+        <div class="tabla">
+          <div class="fila">
+            <div class="clave">Cómo se formaliza</div>
+            <p class="valor">Mediante convenio, en el que se acuerdan grupos, horarios, responsables, uso de datos y autorizaciones de los acudientes. La alianza no tiene costo para la institución.</p>
+          </div>
+          <div class="fila">
+            <div class="clave">Qué aportamos</div>
+            <div class="valor"><ul>
+              <li class="nodo">Diseño y ejecución completa del taller y de sus instrumentos.</li>
+              <li class="nodo">Informe agregado de resultados para la institución.</li>
+              <li class="nodo">Gestión de la ruta de continuidad con universidades aliadas.</li>
+              <li class="nodo">Recomendaciones para fortalecer la transición a educación superior.</li>
+            </ul></div>
+          </div>
+          <div class="fila">
+            <div class="clave">Qué esperamos</div>
+            <div class="valor"><ul>
+              <li class="nodo">Autorización, espacio y horario para las sesiones.</li>
+              <li class="nodo">Un enlace institucional en orientación o coordinación académica.</li>
+              <li class="nodo">Apoyo en la convocatoria y en la comunicación con acudientes.</li>
+              <li class="nodo">Gestión de los consentimientos informados requeridos.</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UNIVERSIDADES ============ -->
+<section class="seccion" id="universidades">
+  <div class="hoja">
+    <div class="malla">
+      <div class="col-rotulo rotulo">
+        <h2>Universidades</h2>
+        <p class="meta">Instituciones de educación superior que abren la puerta de salida</p>
       </div>
       <div class="col-texto">
         <p class="entradilla">Las alianzas se estructuran como pilotos acotados, con cupos definidos, indicadores acordados y reportes periódicos. Preferimos empezar pequeño y demostrar resultados antes de ampliar.</p>
 
-        <h2 class="titulo-aliado">Universidades e instituciones de educación superior</h2>
         <div class="tabla">
           <div class="fila">
             <div class="clave">Cómo se formaliza</div>
@@ -466,35 +556,21 @@ figcaption{
             </ul></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <h2 class="titulo-aliado">Instituciones educativas de media</h2>
-        <div class="tabla">
-          <div class="fila">
-            <div class="clave">Cómo se formaliza</div>
-            <p class="valor">Intervenimos en grado once durante los últimos tres meses del calendario escolar, con un taller de doce semanas que incluye medición de entrada, trabajo experiencial y medición de salida.</p>
-          </div>
-          <div class="fila">
-            <div class="clave">Qué aportamos</div>
-            <div class="valor"><ul>
-              <li class="nodo">Diseño y ejecución completa del taller y sus instrumentos.</li>
-              <li class="nodo">Informe agregado de resultados para la institución.</li>
-              <li class="nodo">Gestión de la ruta de continuidad con universidades aliadas.</li>
-              <li class="nodo">Recomendaciones para fortalecer la transición a educación superior.</li>
-            </ul></div>
-          </div>
-          <div class="fila">
-            <div class="clave">Qué esperamos</div>
-            <div class="valor"><ul>
-              <li class="nodo">Autorización, espacio y horario para las sesiones.</li>
-              <li class="nodo">Un enlace institucional en orientación o coordinación académica.</li>
-              <li class="nodo">Apoyo en la convocatoria y en la comunicación con acudientes.</li>
-              <li class="nodo">Gestión de los consentimientos informados requeridos.</li>
-            </ul></div>
-          </div>
-        </div>
-
-        <h3>Nuestros aliados</h3>
-        <p class="parrafo">Hoy sostenemos cuatro alianzas activas, entre instituciones de educación superior, educación media y organizaciones que complementan el acompañamiento. Si desea conocer el alcance de cada convenio y sus resultados, escríbanos y le compartimos el informe correspondiente.</p>
+<!-- ============ ALIADOS ============ -->
+<section class="seccion suave" id="aliados">
+  <div class="hoja">
+    <div class="malla">
+      <div class="col-rotulo rotulo">
+        <h2>Aliados</h2>
+        <p class="meta">Convenios vigentes</p>
+      </div>
+      <div class="col-texto">
+        <p class="entradilla">Hoy sostenemos cuatro alianzas activas, entre instituciones de educación superior, educación media y organizaciones que complementan el acompañamiento.</p>
         <div class="logos">
           <figure class="aliado">
             <div class="marco"><img src="assets/logos/politecnico-grancolombiano.png" alt="Politécnico Grancolombiano"
@@ -517,59 +593,60 @@ figcaption{
             <figcaption>Fundación Fernando Murillo</figcaption>
           </figure>
         </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CÍRCULO ============ -->
-<section class="seccion turquesa">
+<!-- ============ CÍRCULO DE CONTRIBUCIÓN ============ -->
+<section class="seccion turquesa" id="circulo">
   <div class="hoja">
     <div class="malla">
       <div class="col-rotulo rotulo">
         <h2>Círculo de Contribución y Experiencia</h2>
-        <p class="meta">El modelo que sostiene la comunidad de beneficiarios</p>
+        <p class="meta">El programa que acompaña al estudiante durante toda la carrera</p>
       </div>
       <div class="col-texto">
         <p class="titulo-grande">Recibir, aprender, contribuir.</p>
-        <p class="parrafo">Quien recibe apoyo también aporta. No como condición de pago, sino como parte de su formación. Cada estudiante vinculado acuerda un plan individual de contribución según sus habilidades: diseño, comunicación y redes, apoyo logístico, soporte administrativo, tutoría a otros estudiantes o creación de recursos.</p>
-        <p class="parrafo">El plan tiene entregables, tiempos razonables, criterios de calidad y retroalimentación periódica, de modo que produzca experiencia demostrable para su hoja de vida.</p>
+        <p class="parrafo">Cada estudiante que recibe un beneficio se vincula a la Fundación y aporta desde lo que sabe hacer, o desde lo que quiere aprender a hacer: monitorías académicas a otros estudiantes, diseño, comunicación y redes, producción de recursos formativos, apoyo operativo o soporte administrativo.</p>
 
-        <h3>Límites explícitos del modelo</h3>
-        <ul class="lista">
-          <li>La contribución no constituye relación laboral ni sustituye a personal de la Fundación.</li>
-          <li>No es una sanción ni una contraprestación económica.</li>
-          <li>Se reduce o reprograma en semanas de parciales y finales.</li>
-          <li>Si interfiere con el desempeño académico o el bienestar, el plan se ajusta o se suspende.</li>
-        </ul>
+        <p class="parrafo">La razón no es económica. Un joven que llega a primer semestre con talento pero sin trayectoria suele graduarse cuatro o cinco años después en la misma condición: con un título y sin hoja de vida. En el mercado laboral colombiano esa es, con frecuencia, la barrera que vuelve a cerrar la puerta que la beca había abierto. El Círculo la desmonta desde el primer semestre.</p>
+
+        <p class="parrafo">Mientras estudia, el estudiante practica su propio oficio en un entorno real, con responsabilidades, plazos y criterios de calidad. Desarrolla habilidades técnicas y también las otras: comunicar una idea, sostener un compromiso, trabajar con alguien que no eligió, recibir una corrección y volver a intentarlo. Al graduarse no tiene solamente el diploma; tiene entregables, referencias y una experiencia verificable de varios años.</p>
+
+        <p class="parrafo">Hay además algo que ninguna hoja de vida registra: quien fue acompañado aprende a acompañar. Los estudiantes de las primeras cohortes se convierten en monitores y mentores de quienes vienen detrás. Así el programa deja de depender de nosotros y empieza a sostenerse solo.</p>
+
+        <details class="mas">
+          <summary>Alcance, condiciones y marco del programa</summary>
+          <div class="contenido">
+            <h5>Naturaleza del vínculo</h5>
+            <p>La contribución se formaliza en el Acuerdo de Vinculación y en un Plan Individual de Contribución y Experiencia. Consiste en un aporte en especie de carácter formativo, principalmente monitorías y apoyo a la operación de la Fundación, como contrapartida a los beneficios de acceso gestionados con las instituciones aliadas. No constituye relación laboral, no genera salario ni prestaciones sociales, y no sustituye funciones propias del personal de la Fundación.</p>
+
+            <h5>Dedicación y alcance</h5>
+            <p>El plan individual define entregables o dedicación por periodo, en una medida razonable frente a la carga académica del semestre. Se reduce o se reprograma en semanas de parciales y finales, y se ajusta ante cambios en la situación personal del estudiante.</p>
+
+            <h5>Acompañamiento y aprendizaje</h5>
+            <p>Toda contribución tiene un responsable de acompañamiento, criterios explícitos de calidad y retroalimentación periódica. El plan incluye objetivos de aprendizaje: la actividad solo tiene sentido si el estudiante termina el periodo sabiendo más de lo que sabía al empezarlo.</p>
+
+            <h5>Protección del estudiante</h5>
+            <p>Si la contribución interfiere con el desempeño académico, la salud o el bienestar, el plan se ajusta o se suspende por decisión conjunta. La contribución nunca opera como sanción ni como contraprestación económica, y no puede asignarse a tareas que sustituyan empleos formales.</p>
+
+            <h5>Continuidad del beneficio</h5>
+            <p>La renovación de la beca depende de los compromisos académicos acordados con la institución de educación superior, no del volumen de la contribución. Ambas cosas se acompañan por separado.</p>
+          </div>
+        </details>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ============ PROTECCIÓN DE DATOS ============ -->
-<section class="seccion" id="transparencia">
-  <div class="hoja">
-    <div class="malla">
-      <div class="col-rotulo rotulo">
-        <h2>Protección de datos</h2>
-        <p class="meta">Manejamos datos de menores de edad y de sus familias. Ese es el estándar que nos obliga.</p>
-      </div>
-      <div class="col-texto">
-        <p class="entradilla">Recolectamos y tratamos datos personales conforme a la Ley 1581 de 2012 y al Decreto 1377 de 2013. La participación de cualquier estudiante requiere consentimiento informado del acudiente, y la información individual se comparte con instituciones aliadas únicamente con autorización previa y bajo el principio de minimización de datos.</p>
-        <p class="parrafo">Para consultar, actualizar o suprimir sus datos, o para solicitar copia de nuestra política de tratamiento de la información, escriba a <a href="mailto:fundacionredconecta@gmail.com" style="color:var(--tinta)">fundacionredconecta@gmail.com</a>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- ============ GALERÍA ============ -->
 <section class="seccion" id="galeria">
   <div class="hoja">
     <div class="malla">
       <div class="col-rotulo rotulo">
-        <h2>El programa</h2>
-        <p class="meta">Registro fotográfico de las cohortes</p>
+        <h2>Galería</h2>
+        <p class="meta">Registro fotográfico del programa</p>
       </div>
       <div class="col-texto">
         <p class="entradilla">Doce semanas de taller, visitas a los hogares y el ingreso a la universidad.</p>
@@ -590,26 +667,42 @@ figcaption{
   <div class="hoja">
     <div class="malla">
       <div class="col-rotulo rotulo">
-        <h2>Hablemos</h2>
+        <h2>Contáctanos</h2>
         <p class="meta">Respondemos en un plazo de tres días hábiles</p>
       </div>
       <div class="col-texto">
-        <p class="entradilla">Si representa a una universidad, a una institución educativa o a una organización que trabaja con población escolar, una reunión de cuarenta minutos basta para saber si tiene sentido seguir.</p>
+        <p class="entradilla">Si representas a una universidad o a un colegio, o eres un estudiante que quiere hacer parte del programa, escríbenos.</p>
         <a class="correo" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>
         <div class="tercios" style="margin-top:3rem">
           <div style="border-top-color:var(--hilo-claro)">
             <h4 style="color:#fff">Teléfono</h4>
-            <p style="color:rgba(255,255,255,.75)">+57 313 401 1695</p>
+            <p style="color:rgba(255,255,255,.75)"><a class="enlace-texto" href="tel:+573134011695">+57 313 401 1695</a></p>
+          </div>
+          <div style="border-top-color:var(--hilo-claro)">
+            <h4 style="color:#fff">Instagram</h4>
+            <p style="color:rgba(255,255,255,.75)"><a class="enlace-texto" href="https://www.instagram.com/fund.red.conecta/" target="_blank" rel="noopener">@fund.red.conecta</a></p>
           </div>
           <div style="border-top-color:var(--hilo-claro)">
             <h4 style="color:#fff">Ubicación</h4>
             <p style="color:rgba(255,255,255,.75)">Bogotá, Colombia</p>
           </div>
-          <div style="border-top-color:var(--hilo-claro)">
-            <h4 style="color:#fff">Equipo</h4>
-            <p style="color:rgba(255,255,255,.75)"><a href="acceso.html" style="text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)">Acceso a herramientas internas</a></p>
-          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INFORMACIÓN ADICIONAL ============ -->
+<section class="seccion" id="adicional">
+  <div class="hoja">
+    <div class="malla">
+      <div class="col-rotulo rotulo">
+        <h2 style="font-size:1rem">Información adicional</h2>
+      </div>
+      <div class="col-texto">
+        <p class="rotulo-min" style="margin-bottom:.9rem">Tratamiento de datos personales</p>
+        <p class="parrafo" style="font-size:.95rem;color:var(--acero)">Recolectamos y tratamos datos personales conforme a la Ley 1581 de 2012 y al Decreto 1377 de 2013. La participación de cualquier estudiante requiere consentimiento informado del acudiente, y la información individual se comparte con instituciones aliadas únicamente con autorización previa y bajo el principio de minimización de datos.</p>
+        <p class="parrafo" style="font-size:.95rem;color:var(--acero)">Para consultar, actualizar o suprimir tus datos, o para pedir copia de nuestra política de tratamiento de la información, escríbenos a <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
       </div>
     </div>
   </div>
@@ -634,14 +727,39 @@ figcaption{
 document.getElementById('anio').textContent = new Date().getFullYear();
 
 const ETAPAS = [
-  {t:"Alianzas", corto:"Alianzas", d:"Aseguramos el campo de intervención y las rutas reales de continuidad. Se acuerdan grupos, horarios, permisos y uso de datos con los colegios; y cupos, beneficios y criterios con las universidades."},
-  {t:"Taller de tres meses", corto:"Taller", d:"Doce semanas en grado once: medición de línea base, intervención experiencial en autoconocimiento, habilidades, exploración vocacional y proyecto de vida, y medición de salida."},
-  {t:"Preselección", corto:"Preselección", d:"Consolidamos puntajes e indicios cualitativos para pasar de participantes a candidatos. Se define la lista de preseleccionados y la lista de espera, con justificación escrita por estudiante."},
-  {t:"Entrevista familiar", corto:"Entrevista", d:"Visita domiciliaria y entrevista estructurada con acudiente y estudiante. Mapeamos red de apoyo, situación económica, transporte, conectividad, carga de cuidado y riesgos psicosociales."},
-  {t:"Asignación", corto:"Asignación", d:"Cruzamos el perfil del estudiante con la oferta disponible según ubicación, afinidad vocacional, apoyos existentes y ajuste al contexto. Resultado: una recomendación justificada y un plan de ruta."},
-  {t:"Vinculación", corto:"Vinculación", d:"Firma del acuerdo entre estudiante, acudiente y Fundación. Se define el plan individual de contribución y el plan académico de seguimiento, con compromisos medibles para ambas partes."},
-  {t:"Acompañamiento", corto:"Seguimiento", d:"Seguimiento periódico de notas, asistencia, bienestar y situación económica, con semáforo de alertas tempranas. Cuando aparece riesgo de deserción, se activa intervención intensiva."},
-  {t:"Cierre de cohorte", corto:"Cierre", d:"Medimos ingreso, permanencia, desempeño y satisfacción; recogemos lecciones con colegios y universidades; y ajustamos criterios, instrumentos y procesos para el siguiente grupo."}
+  {
+    t:"Alianzas", corto:"Alianzas",
+    d:"Firmamos convenio con colegios oficiales, que abren el espacio de trabajo en grado once, y con instituciones de educación superior, que definen cuántos beneficios de acceso ponen a disposición y bajo qué condiciones de renovación. Sin las dos puntas no hay ruta: una aporta el talento, la otra el destino."
+  },
+  {
+    t:"Pruebas psicométricas", corto:"Pruebas",
+    d:"Aplicamos una batería de instrumentos al inicio del proceso y la repetimos al cierre. La primera medición traza la línea base de autoestima, apoyo social percibido y autoeficacia vocacional; la segunda muestra cuánto se movió cada estudiante. El cambio entre ambas pesa en la decisión tanto como el resultado absoluto."
+  },
+  {
+    t:"Talleres de orientación profesional", corto:"Talleres",
+    d:"Doce semanas de trabajo experiencial en el colegio: autoconocimiento y propósito, identificación de fortalezas técnicas y blandas, exploración de programas y carreras, proyecto de vida, y preparación concreta para la transición, incluidos documentos, entrevistas, pruebas de admisión y convocatorias de becas."
+  },
+  {
+    t:"Preselección de candidatos", corto:"Preselección",
+    d:"Consolidamos resultados cuantitativos y evidencia cualitativa para pasar de participantes a candidatos. Cada preseleccionado queda con una justificación escrita y se conforma además una lista de espera. Por rigor metodológico, quien no completó todos los instrumentos no entra al ordenamiento."
+  },
+  {
+    t:"Entrevistas con familias", corto:"Entrevistas",
+    d:"Visitamos el hogar y conversamos con el acudiente y el estudiante. Mapeamos red de apoyo, situación económica, tiempos y costos de transporte, conectividad, carga de cuidado y factores psicosociales. No buscamos descartar: buscamos saber qué necesita cada quien para sostenerse una vez empiece."
+  },
+  {
+    t:"Selección", corto:"Selección",
+    d:"Cruzamos el perfil del estudiante con la oferta disponible según afinidad vocacional, ubicación, apoyos existentes y ajuste al contexto familiar. El resultado es una recomendación justificada de programa e institución, y un plan de ruta con lo que hay que hacer en las semanas siguientes para lograr la matrícula."
+  },
+  {
+    t:"Acompañamiento integral", corto:"Acompañamiento",
+    d:"Desde la matrícula y durante toda la carrera: seguimiento de notas y asistencia, tutorías y nivelación académica, acompañamiento psicológico y gestión de apoyos complementarios. Un semáforo de alertas tempranas permite intervenir antes de que una dificultad se convierta en deserción."
+  },
+  {
+    t:"Círculo de Contribución y Experiencia", corto:"Contribución", transversal:true,
+    d:"No es una etapa final, sino un eje que atraviesa el programa desde la vinculación. Cada estudiante aporta a la Fundación desde sus habilidades mientras estudia, y en ese aporte gana experiencia real, verificable y acompañada.",
+    enlace:"#circulo", enlaceTexto:"Conocer el programa"
+  }
 ];
 
 const tira = document.getElementById('tira');
@@ -652,24 +770,28 @@ ETAPAS.forEach((e,i)=>{
   const b = document.createElement('button');
   b.type = 'button';
   b.setAttribute('role','tab');
-  // el escalón ascendente: cada etapa arranca un poco más arriba que la anterior
   b.style.paddingTop = (1.1 + (7 - i) * 0.42) + 'rem';
-  b.innerHTML = '<span class="cifra">'+String(i+1).padStart(2,'0')+'</span><span class="rot">'+e.corto+'</span>';
+  b.innerHTML = '<span class="cifra">'+String(i+1).padStart(2,'0')+'</span>'
+              + '<span class="rot">'+e.corto+'</span>'
+              + (e.transversal ? '<span class="marca">Transversal</span>' : '');
   b.addEventListener('click', ()=>seleccionar(i));
   tira.appendChild(b);
 });
 
 function seleccionar(i){
+  const e = ETAPAS[i];
   [...tira.children].forEach((b,j)=>b.setAttribute('aria-selected', j===i));
-  dTit.textContent = String(i+1).padStart(2,'0') + ' — ' + ETAPAS[i].t;
-  dTxt.textContent = ETAPAS[i].d;
+  dTit.textContent = String(i+1).padStart(2,'0') + ' — ' + e.t;
+  dTxt.innerHTML = e.d + (e.enlace ? ' <a class="enlace-texto" href="'+e.enlace+'">'+e.enlaceTexto+'</a>' : '');
 }
 seleccionar(0);
 
 const tm = document.getElementById('tira-movil');
 ETAPAS.forEach((e,i)=>{
   const d = document.createElement('div');
-  d.innerHTML = '<b>'+String(i+1).padStart(2,'0')+'</b><strong>'+e.t+'</strong><span>'+e.d+'</span>';
+  d.innerHTML = '<b>'+String(i+1).padStart(2,'0')+'</b><div><strong>'+e.t+'</strong><span>'+e.d
+              + (e.enlace ? ' <a class="enlace-texto" href="'+e.enlace+'">'+e.enlaceTexto+'</a>' : '')
+              + '</span></div>';
   tm.appendChild(d);
 });
 </script>

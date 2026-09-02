@@ -150,7 +150,7 @@ footer a:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
 
       <div class="aviso" id="aviso" role="status"></div>
 
-      <p class="pie-form">¿Olvidó su contraseña? Escriba a <a href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
+      <p class="pie-form">¿Olvidaste tu contraseña? Escribe a <a href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
     </section>
 
     <!-- ---------- portal ---------- -->
@@ -166,8 +166,8 @@ footer a:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
       <div class="apps" id="apps"></div>
 
       <p class="recordatorio">
-        Antes de registrar información de una familia, confirme que el consentimiento informado quedó firmado.
-        No comparta estos enlaces por fuera del equipo, ni descargue actas a equipos compartidos.
+        Antes de registrar información de una familia, confirma que el consentimiento informado quedó firmado.
+        No compartas estos enlaces por fuera del equipo, ni descargues actas a equipos compartidos.
       </p>
     </section>
 
@@ -265,7 +265,7 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     ({ createClient } = await import("https://esm.sh/@supabase/supabase-js@2"));
   } catch (e) {
     document.getElementById("form-login").style.display = "none";
-    mostrarAviso("No se pudo cargar el servicio de autenticación. Revise su conexión e intente de nuevo.");
+    mostrarAviso("No se pudo cargar el servicio de autenticación. Revisa tu conexión e intenta de nuevo.");
     throw e;
   }
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -283,7 +283,7 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     });
 
     btn.disabled = false; btn.textContent = "Entrar";
-    if (error) { mostrarAviso("No pudimos validar esos datos. Revise el correo y la contraseña, o solicite un restablecimiento."); return; }
+    if (error) { mostrarAviso("No pudimos validar esos datos. Revisa el correo y la contraseña, o solicita un restablecimiento."); return; }
     abrirPortal(data.session.user.email);
   });
 

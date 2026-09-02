@@ -164,15 +164,15 @@ h3{
 .tercios p{margin:0;font-size:.98rem;line-height:1.6}
 
 /* ---------------- declaración ---------------- */
-.declaracion{background:var(--tinta);color:#fff;padding-block:clamp(4.5rem,11vw,9rem)}
+.declaracion{background:var(--tinta);color:#fff;padding-block:clamp(3rem,6.5vw,5.25rem)}
 .declaracion p{
   font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:clamp(1.9rem,5.6vw,4.6rem);line-height:1.06;letter-spacing:-.02em;
-  margin:0;max-width:20ch;
+  font-size:clamp(1.4rem,3.35vw,2.6rem);line-height:1.18;letter-spacing:-.018em;
+  margin:0;max-width:36ch;
 }
 .declaracion .firma{
   font-style:normal;font-family:var(--sans);font-size:.74rem;font-weight:500;
-  letter-spacing:.06em;color:rgba(255,255,255,.45);margin-top:2.5rem;max-width:none;
+  letter-spacing:.06em;color:rgba(255,255,255,.45);margin-top:1.75rem;max-width:none;
 }
 
 /* ---------------- ruta de 8 etapas ---------------- */
@@ -188,7 +188,8 @@ h3{
 .tira .rot{display:block;font-size:.74rem;font-weight:500;margin-top:.6rem;line-height:1.3}
 .tira button[aria-selected="true"] .cifra{color:var(--turquesa)}
 .tira button[aria-selected="true"] .rot{color:var(--tinta);font-weight:600}
-.detalle{border-top:1px solid var(--tinta);padding-top:1.5rem;margin-top:0;min-height:120px}
+.detalle{border-top:1px solid var(--tinta);padding-top:1.5rem;margin-top:0;display:none}
+.detalle.visible{display:block}
 .detalle h4{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--tinta);margin:0 0 .7rem}
 .detalle p{margin:0;max-width:58ch}
 .tira-movil{display:none}
@@ -351,6 +352,14 @@ details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
   display:block;font-size:.6rem;font-weight:700;letter-spacing:.09em;
   color:var(--turquesa);margin-top:.4rem;
 }
+.tira .abrir{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;margin-top:.9rem;
+  border:1px solid var(--acero);color:var(--acero);
+  font-size:.9rem;font-weight:400;line-height:1;
+}
+.tira button:hover .abrir{border-color:var(--tinta);color:var(--tinta)}
+.tira button[aria-selected="true"] .abrir{background:var(--tinta);border-color:var(--tinta);color:#fff}
 </style>
 </head>
 <body>
@@ -364,7 +373,7 @@ details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
         <a href="#operamos">Cómo operamos</a>
         <a href="#colegios">Colegios</a>
         <a href="#universidades">Universidades</a>
-        <a href="#circulo">Contribución</a>
+        <a href="#circulo">Programa</a>
         <a href="#contacto">Contacto</a>
         <a class="acceso" href="acceso.html">Acceso</a>
       </nav>
@@ -415,9 +424,6 @@ details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
         <p class="parrafo">Fundación Red Conecta articula colegios públicos con instituciones de educación superior para que el talento que ya existe en las aulas encuentre por dónde salir. Identificamos estudiantes de grado once con capacidad y determinación, gestionamos con universidades aliadas los beneficios que hacen viable su ingreso, y los acompañamos hasta que se gradúan.</p>
         <p class="parrafo">En los colegios oficiales hay jóvenes con capacidad de sobra para una carrera universitaria que nunca llegan a matricularse. No por falta de mérito: por falta de ruta. Nuestro trabajo es construir esa ruta y caminarla con ellos.</p>
 
-        <h3>Lo que no hacemos</h3>
-        <p class="parrafo">La Fundación no imparte educación formal ni no formal, y no otorga títulos ni certificaciones académicas. Nuestra actuación se enmarca en la educación informal: orientación, mentoría, acompañamiento y seguimiento, complementarios a los procesos de las instituciones legalmente autorizadas. No reemplazamos funciones académicas, administrativas ni de bienestar de las universidades aliadas.</p>
-
         <div class="bloque-valores">
         <p class="rotulo-min">Nuestros valores</p>
         <div class="valores-min">
@@ -435,6 +441,14 @@ details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
           </div>
         </div>
         </div>
+
+        <details class="mas">
+          <summary>Lo que no hacemos</summary>
+          <div class="contenido">
+            <p>La Fundación no imparte educación formal ni no formal, y no otorga títulos ni certificaciones académicas. Nuestra actuación se enmarca en la educación informal: orientación, mentoría, acompañamiento y seguimiento, complementarios a los procesos de las instituciones legalmente autorizadas.</p>
+            <p style="margin-top:1rem">No reemplazamos funciones académicas, administrativas ni de bienestar de las universidades aliadas. Los beneficios de acceso son administrados directamente por cada institución, bajo sus políticas internas.</p>
+          </div>
+        </details>
       </div>
     </div>
   </div>
@@ -444,8 +458,8 @@ details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
 <section class="declaracion">
   <div class="hoja">
     <div style="max-width:1560px;margin-inline:auto">
-      <p>El talento está repartido de forma pareja. Las oportunidades no.</p>
-      <p class="firma">Fundación Red Conecta</p>
+      <p>Largo es el camino de la enseñanza por medio de teorías; breve y eficaz por medio de ejemplos.</p>
+      <p class="firma">Séneca · Epístolas morales a Lucilio</p>
     </div>
   </div>
 </section>
@@ -456,7 +470,7 @@ details.mas .contenido p{margin:0;line-height:1.65;font-size:.98rem}
     <div class="malla">
       <div class="col-rotulo rotulo">
         <h2>Cómo operamos</h2>
-        <p class="meta">Ocho etapas, del primer convenio a la graduación. Selecciona una para ver el detalle.</p>
+        <p class="meta">Ocho etapas, del primer convenio a la graduación. Abre cada una para leer qué ocurre en ella.</p>
       </div>
       <div class="col-texto">
         <p class="entradilla">Articulamos el talento de los colegios con los beneficios de las universidades, a través de un proceso de reconocimiento, orientación y selección.</p>
@@ -766,25 +780,44 @@ const tira = document.getElementById('tira');
 const dTit = document.getElementById('detalle-titulo');
 const dTxt = document.getElementById('detalle-texto');
 
+const panel = document.getElementById('detalle');
+let abierta = null;
+
 ETAPAS.forEach((e,i)=>{
   const b = document.createElement('button');
   b.type = 'button';
   b.setAttribute('role','tab');
+  b.setAttribute('aria-selected','false');
+  b.setAttribute('aria-label', 'Ver detalle de la etapa ' + (i+1) + ': ' + e.t);
   b.style.paddingTop = (1.1 + (7 - i) * 0.42) + 'rem';
   b.innerHTML = '<span class="cifra">'+String(i+1).padStart(2,'0')+'</span>'
               + '<span class="rot">'+e.corto+'</span>'
-              + (e.transversal ? '<span class="marca">Transversal</span>' : '');
-  b.addEventListener('click', ()=>seleccionar(i));
+              + (e.transversal ? '<span class="marca">Transversal</span>' : '')
+              + '<span class="abrir" aria-hidden="true">+</span>';
+  b.addEventListener('click', ()=>alternar(i));
   tira.appendChild(b);
 });
 
-function seleccionar(i){
+function alternar(i){
+  if (abierta === i) {                    // cerrar la que ya estaba abierta
+    abierta = null;
+    panel.classList.remove('visible');
+    [...tira.children].forEach(b=>{
+      b.setAttribute('aria-selected','false');
+      b.querySelector('.abrir').textContent = '+';
+    });
+    return;
+  }
+  abierta = i;
   const e = ETAPAS[i];
-  [...tira.children].forEach((b,j)=>b.setAttribute('aria-selected', j===i));
+  [...tira.children].forEach((b,j)=>{
+    b.setAttribute('aria-selected', j===i);
+    b.querySelector('.abrir').textContent = j===i ? '–' : '+';
+  });
   dTit.textContent = String(i+1).padStart(2,'0') + ' — ' + e.t;
   dTxt.innerHTML = e.d + (e.enlace ? ' <a class="enlace-texto" href="'+e.enlace+'">'+e.enlaceTexto+'</a>' : '');
+  panel.classList.add('visible');
 }
-seleccionar(0);
 
 const tm = document.getElementById('tira-movil');
 ETAPAS.forEach((e,i)=>{

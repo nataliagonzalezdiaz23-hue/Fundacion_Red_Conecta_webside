@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /acceso
 Disallow: /herramientas
+
+Sitemap: https://fundacionredconecta.org/sitemap.xml

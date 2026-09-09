@@ -39,7 +39,23 @@ institución cuando ella lo haya autorizado por escrito; mientras tanto, deje el
 
 Cada vez que haga un commit en GitHub, Vercel vuelve a publicar solo.
 
-### Dominio propio
+### Dominio
+
+El sitio vive en **https://fundacionredconecta.org**, comprado en Vercel el 8 de septiembre de 2026,
+con renovación automática al 8 de septiembre de 2027. Al haberse comprado dentro de Vercel, los
+nameservers quedan configurados solos: no hay registros DNS que mantener.
+
+### Indexación en Google
+
+`sitemap.xml` lista la página y `robots.txt` lo declara, además de excluir `/acceso` y
+`/herramientas`. `index.html` incluye etiquetas canónicas, metadatos de vista previa con direcciones
+absolutas y un bloque de datos estructurados de tipo NGO con el nombre, la descripción, el correo,
+el teléfono, la ciudad y el enlace a Instagram.
+
+Al agregar páginas nuevas hay que sumarlas al `sitemap.xml`, y si algún día cambia el dominio, hay
+que actualizar las direcciones absolutas de `index.html`, `sitemap.xml` y `robots.txt`.
+
+### Dominio propio, referencia
 
 Cómprelo donde prefiera (`.org` o `.org.co` son los habituales para una fundación) y en Vercel vaya a
 **Settings → Domains → Add**. Vercel le indica los registros DNS que debe crear en su proveedor y
@@ -119,7 +135,28 @@ acompañe una foto con el nombre completo de un menor.
 
 Un espacio que no vaya a llenarse debe borrarse del HTML, no dejarse con el marcador visible.
 
-## 5. Sistema visual
+## 5. Rendimiento y accesibilidad
+
+Ajustes aplicados y que conviene mantener al agregar contenido:
+
+- **Imágenes en WebP.** Todas las fotos y logos están en `.webp`, que pesa entre un tercio y la
+  mitad que el JPG o PNG equivalente. Los `.jpg` y `.png` antiguos siguen en el repositorio pero
+  ya nadie los descarga; puede borrarlos cuando quiera, salvo `compartir.jpg` y los `favicon*.png`,
+  que sí se usan.
+- **Carga diferida.** Solo el logo, la marca de agua de la portada y la primera banda cargan de
+  inmediato. El resto llega cuando el visitante se acerca. Al agregar una imagen nueva, copie el
+  patrón: `loading="lazy" decoding="async"` más `width` y `height`.
+- **Dimensiones declaradas.** Cada `<img>` lleva su ancho y alto reales. Sin eso el texto salta
+  cuando la foto termina de cargar, y Google penaliza ese salto.
+- **Jerarquía de encabezados.** Un solo `h1` (el titular de la portada), `h2` para cada sección y
+  `h3` para subtítulos. No saltar niveles.
+- **Página de error.** `404.html` se sirve automáticamente cuando alguien escribe una dirección
+  que no existe.
+- **Color de barra.** `theme-color` pinta la barra del navegador en celular con el azul de la marca.
+
+La portada carga hoy unos 170 KB de imágenes, frente a los 2,4 MB que descargaba antes de golpe.
+
+## 6. Sistema visual
 
 La dirección de diseño es editorial y tipográfica: retícula de doce columnas visible mediante reglas
 de un pixel, tipografía de gran escala como elemento principal, y color usado como acontecimiento
@@ -136,7 +173,7 @@ puntual en vez de decoración distribuida.
 - Una sola animación en toda la página: la entrada del titular y el trazo de la regla al cargar.
   Se desactiva sola si el sistema operativo pide movimiento reducido.
 
-## 6. Mantenimiento
+## 7. Mantenimiento
 
 Todo el contenido está en HTML plano, con el texto legible dentro del archivo. Para cambiar una
 sección, edite el párrafo directamente. Las ocho etapas del proceso viven en el arreglo `ETAPAS`

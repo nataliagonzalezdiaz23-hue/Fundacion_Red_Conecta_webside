@@ -438,6 +438,26 @@ body.sin-scroll{overflow:hidden}
   .hamburguesa{display:flex}
   .nav{display:none}
 }
+
+/* ---------------- redes sociales ---------------- */
+.redes{display:flex;flex-direction:column;gap:.55rem;margin:0}
+.red{
+  display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  font-family:var(--sans);font-size:.88rem;color:rgba(255,255,255,.75);
+  width:fit-content;border-bottom:1px solid transparent;padding-bottom:1px;
+}
+.red svg{width:19px;height:19px;flex:none}
+.red:hover{color:var(--turquesa);border-bottom-color:var(--turquesa)}
+
+.pie-cabeza{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.redes-pie{display:flex;gap:1.1rem;align-items:center}
+.redes-pie a{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;color:rgba(255,255,255,.7);
+  border:1px solid var(--hilo-claro);border-radius:50%;text-decoration:none;
+}
+.redes-pie a:hover{color:var(--turquesa);border-color:rgba(0,206,209,.55)}
+.redes-pie svg{width:17px;height:17px}
 </style>
 </head>
 <body>
@@ -859,8 +879,11 @@ body.sin-scroll{overflow:hidden}
             <p style="color:rgba(255,255,255,.75)"><a class="enlace-texto" href="tel:+573134011695">+57 313 401 1695</a></p>
           </div>
           <div style="border-top-color:var(--hilo-claro)">
-            <h3 class="valor-titulo" style="color:#fff">Instagram</h3>
-            <p style="color:rgba(255,255,255,.75)"><a class="enlace-texto" href="https://www.instagram.com/fund.red.conecta/" target="_blank" rel="noopener">@fund.red.conecta</a></p>
+            <h3 class="valor-titulo" style="color:#fff">Redes</h3>
+            <div class="redes">
+              <a class="red" href="https://www.instagram.com/fund.red.conecta/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>@fund.red.conecta</span></a>
+              <a class="red" href="https://www.linkedin.com/company/fundacion-red-conecta/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.6 9.6h4.75v11.9H2.6V9.6zM9.6 9.6h4.55v1.63h.07c.63-1.2 2.18-2.46 4.49-2.46 4.8 0 5.69 3.16 5.69 7.27v5.46h-4.75v-4.84c0-1.16-.02-2.65-1.61-2.65-1.62 0-1.87 1.26-1.87 2.57v4.92H9.6V9.6z"/></svg><span>Fundación Red Conecta</span></a>
+            </div>
           </div>
           <div style="border-top-color:var(--hilo-claro)">
             <h3 class="valor-titulo" style="color:#fff">Ubicación</h3>
@@ -893,7 +916,13 @@ body.sin-scroll{overflow:hidden}
 <footer class="pie">
   <div class="hoja">
     <div style="max-width:1560px;margin-inline:auto">
-      <img src="assets/logo-blanco.webp" alt="Fundación Red Conecta" width="900" height="252" loading="eager" decoding="async" fetchpriority="high">
+      <div class="pie-cabeza">
+        <img src="assets/logo-blanco.webp" alt="Fundación Red Conecta" width="900" height="252" loading="lazy" decoding="async">
+        <div class="redes-pie">
+          <a href="https://www.instagram.com/fund.red.conecta/" target="_blank" rel="noopener" aria-label="Instagram de Fundación Red Conecta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.linkedin.com/company/fundacion-red-conecta/" target="_blank" rel="noopener" aria-label="LinkedIn de Fundación Red Conecta"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.6 9.6h4.75v11.9H2.6V9.6zM9.6 9.6h4.55v1.63h.07c.63-1.2 2.18-2.46 4.49-2.46 4.8 0 5.69 3.16 5.69 7.27v5.46h-4.75v-4.84c0-1.16-.02-2.65-1.61-2.65-1.62 0-1.87 1.26-1.87 2.57v4.92H9.6V9.6z"/></svg></a>
+        </div>
+      </div>
       <div class="fila">
         <span>Entidad sin ánimo de lucro</span>
         <span><a href="acceso.html">Acceso al equipo</a></span>

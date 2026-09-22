@@ -238,10 +238,20 @@ h3:not(.valor-titulo){
 @media(max-width:820px){
   .tira,.detalle{display:none}
   .tira-movil{display:block;margin-top:2rem;border-top:1px solid var(--hilo)}
-  .tira-movil div{padding:1.1rem 0;border-bottom:1px solid var(--hilo)}
-  .tira-movil b{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--turquesa);letter-spacing:-.02em}
-  .tira-movil strong{font-family:var(--sans);font-size:.95rem;color:var(--tinta);display:block;margin:.15rem 0 .4rem}
-  .tira-movil span{font-size:1rem;line-height:1.6}
+  .tira-movil > details{border-bottom:1px solid var(--hilo)}
+  .tira-movil > details > summary{
+    list-style:none;cursor:pointer;padding:1.05rem 0;display:flex;align-items:baseline;gap:.75rem;
+  }
+  .tira-movil > details > summary::-webkit-details-marker{display:none}
+  .tira-movil b{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--turquesa);letter-spacing:-.02em;flex:none}
+  .tira-movil strong{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--tinta);flex:1}
+  .tira-movil summary .signo{
+    flex:none;display:inline-flex;align-items:center;justify-content:center;
+    width:20px;height:20px;border:1px solid var(--acero);color:var(--acero);
+    font-family:var(--sans);font-size:.9rem;line-height:1;
+  }
+  .tira-movil > details[open] summary .signo{background:var(--tinta);border-color:var(--tinta);color:#fff}
+  .tira-movil > details > span{display:block;font-size:1rem;line-height:1.6;padding:0 0 1.1rem 2.65rem}
 }
 
 /* ---------------- alianzas (tablas) ---------------- */
@@ -531,8 +541,6 @@ body.sin-scroll{overflow:hidden}
 
         <p class="parrafo">Identificamos a los candidatos en instituciones de educación media pública, valoramos su perfil y su contexto, gestionamos con instituciones de educación superior los beneficios que hacen viable su ingreso, y sostenemos el acompañamiento académico y psicosocial durante toda su formación.</p>
 
-        <p class="parrafo">Trabajamos en red: la articulación con colegios, universidades, entidades públicas y organizaciones aliadas es la condición que hace posible cada trayectoria.</p>
-
         <div class="bloque-valores">
         <p class="rotulo-min">Valores</p>
         <div class="valores-min">
@@ -556,6 +564,8 @@ body.sin-scroll{overflow:hidden}
             <h3 class="valor-titulo">Transparencia</h3>
             <p>Procesos claros, medibles y responsables.</p>
           </div>
+          <div>
+            </div>
         </div>
         </div>
 
@@ -631,30 +641,29 @@ body.sin-scroll{overflow:hidden}
         <p class="meta">Instituciones de educación media</p>
       </div>
       <div class="col-texto">
-        <p class="entradilla">Desarrollamos con los estudiantes de grado once un proceso de acompañamiento integral que comprende diagnóstico, orientación profesional, planes de trabajo individuales y medición de resultados, sin costo alguno para la institución.</p>
+        <p class="entradilla">Acompañamiento integral a estudiantes de grado once, sin costo para la institución.</p>
 
         <div class="tabla">
           <div class="fila">
             <div class="clave">Cómo se formaliza</div>
-            <p class="valor">Mediante convenio institucional, en el que se acuerdan el alcance de la intervención, los grupos participantes, el cronograma, los responsables de cada parte y las condiciones de tratamiento de datos.</p>
+            <p class="valor">Convenio institucional que define alcance, grupos participantes, cronograma, responsables y tratamiento de datos.</p>
           </div>
           <div class="fila">
             <div class="clave">Qué aportamos</div>
             <div class="valor"><ul>
-              <li class="nodo">Diseño y ejecución del proceso completo, con sus instrumentos y su equipo.</li>
-              <li class="nodo">Diagnóstico individual y plan de trabajo por estudiante participante.</li>
-              <li class="nodo">Informe agregado de resultados y de avance para la institución.</li>
-              <li class="nodo">Gestión de la ruta de continuidad con instituciones de educación superior aliadas.</li>
-              <li class="nodo">Recomendaciones para el fortalecimiento de la transición a la educación superior.</li>
+              <li class="nodo">Diagnóstico individual y plan de trabajo por estudiante.</li>
+              <li class="nodo">Orientación profesional y medición de resultados.</li>
+              <li class="nodo">Informe de avance para la institución.</li>
+              <li class="nodo">Ruta de continuidad con instituciones de educación superior aliadas.</li>
             </ul></div>
           </div>
           <div class="fila">
             <div class="clave">Qué esperamos</div>
             <div class="valor"><ul>
-              <li class="nodo">Autorización, espacio y horario para el desarrollo de las sesiones.</li>
-              <li class="nodo">Designación de un enlace institucional en orientación o coordinación académica.</li>
-              <li class="nodo">Apoyo en la convocatoria y en la comunicación con los acudientes.</li>
-              <li class="nodo">Gestión de los consentimientos informados requeridos.</li>
+              <li class="nodo">Espacio y horario para las sesiones.</li>
+              <li class="nodo">Un enlace institucional en orientación o coordinación.</li>
+              <li class="nodo">Apoyo en la convocatoria y en la comunicación con acudientes.</li>
+              <li class="nodo">Gestión de los consentimientos informados.</li>
             </ul></div>
           </div>
         </div>
@@ -672,29 +681,29 @@ body.sin-scroll{overflow:hidden}
         <p class="meta">Instituciones de educación superior</p>
       </div>
       <div class="col-texto">
-        <p class="entradilla">Establecemos alianzas formales orientadas a atender un problema que afecta a toda institución de educación superior: la deserción estudiantil. Y a materializar, con resultados medibles, sus compromisos de responsabilidad social.</p>
+        <p class="entradilla">Alianzas formales orientadas a reducir la deserción estudiantil y a materializar, con resultados medibles, los compromisos de responsabilidad social.</p>
 
         <div class="tabla">
           <div class="fila">
             <div class="clave">Cómo se formaliza</div>
-            <p class="valor">Mediante convenio institucional que define el número y la naturaleza de los beneficios de acceso —becas, cupos priorizados, descuentos, exenciones o apoyos de bienestar—, administrados en todos los casos por la institución conforme a sus políticas internas.</p>
+            <p class="valor">Convenio que define el número y la naturaleza de los beneficios de acceso: becas, cupos priorizados, descuentos, exenciones o apoyos de bienestar. Los administra siempre la institución, conforme a sus políticas internas.</p>
           </div>
           <div class="fila">
             <div class="clave">Qué aportamos</div>
             <div class="valor"><ul>
-              <li class="nodo">Candidatos con diagnóstico previo y valoración documentada de su perfil y su contexto.</li>
-              <li class="nodo">Acompañamiento académico y psicosocial durante la vigencia del convenio.</li>
-              <li class="nodo">Identificación y gestión de alertas tempranas de deserción.</li>
-              <li class="nodo">Reportes periódicos de permanencia, rendimiento y atención de alertas, con valor para los procesos de autoevaluación institucional.</li>
+              <li class="nodo">Candidatos con diagnóstico previo y valoración documentada de perfil y contexto.</li>
+              <li class="nodo">Acompañamiento académico y psicosocial durante el convenio.</li>
+              <li class="nodo">Gestión de alertas tempranas de deserción.</li>
+              <li class="nodo">Reportes de permanencia y rendimiento, con valor para la autoevaluación institucional.</li>
             </ul></div>
           </div>
           <div class="fila">
             <div class="clave">Qué esperamos</div>
             <div class="valor"><ul>
-              <li class="nodo">Definición del número de beneficios de acceso y de sus condiciones de renovación.</li>
-              <li class="nodo">Designación de un enlace institucional para la coordinación de admisión y seguimiento.</li>
-              <li class="nodo">Información sobre requisitos, calendarios y costos indirectos del programa.</li>
-              <li class="nodo">Evaluación conjunta al cierre de cada periodo académico.</li>
+              <li class="nodo">Número de beneficios de acceso y condiciones de renovación.</li>
+              <li class="nodo">Un enlace institucional para admisión y seguimiento.</li>
+              <li class="nodo">Requisitos, calendarios y costos indirectos del programa.</li>
+              <li class="nodo">Evaluación conjunta al cierre de cada periodo.</li>
             </ul></div>
           </div>
         </div>
@@ -715,11 +724,11 @@ body.sin-scroll{overflow:hidden}
       <div class="col-texto">
         <p class="entradilla">La deserción no se origina en la universidad. Se origina antes de la matrícula.</p>
 
-        <p class="parrafo">Las convocatorias de beca evalúan la información que cabe en un formulario: calificaciones, puntajes y clasificación socioeconómica. Esos datos no permiten anticipar si un estudiante logrará sostener su proceso académico. Los factores que sí inciden en la permanencia son de otro orden, y ninguna oficina de admisiones cuenta con los medios para levantarlos.</p>
+        <p class="parrafo">Las convocatorias de beca evalúan lo que cabe en un formulario: calificaciones, puntajes y clasificación socioeconómica. Esos datos no permiten anticipar si un estudiante logrará sostener su proceso, y ninguna oficina de admisiones cuenta con los medios para levantar los que sí lo predicen.</p>
 
-        <p class="parrafo">Para las instituciones que no requieren la alianza completa, los componentes del proceso pueden contratarse de manera independiente. Una institución de educación superior puede vincular únicamente el fortalecimiento de sus procesos de selección de becarios, con la valoración y el informe de idoneidad de cada candidato. Una institución de educación media puede vincular únicamente el proceso de orientación profesional con sus estudiantes de grado once. Y cualquiera de las dos puede incorporar el acompañamiento posterior a la matrícula.</p>
+        <p class="parrafo">Para las instituciones que no requieren la alianza completa, los componentes del proceso se contratan por separado: el fortalecimiento de la selección de becarios, la orientación profesional en grado once, o el acompañamiento posterior a la matrícula.</p>
 
-        <p class="entradilla" style="margin:2.5rem 0 0">Las condiciones de cada servicio se definen conjuntamente, según el alcance requerido y el número de estudiantes.</p>
+        <p class="entradilla" style="margin:2.5rem 0 0">Las condiciones se definen conjuntamente, según el alcance y el número de estudiantes.</p>
       </div>
     </div>
   </div>
@@ -773,13 +782,11 @@ body.sin-scroll{overflow:hidden}
       <div class="col-texto">
         <p class="titulo-grande">Recibir, aprender, contribuir.</p>
 
-        <p class="parrafo">Todo estudiante beneficiario se vincula a la Fundación y realiza un aporte en especie de carácter formativo, definido según sus habilidades e intereses: monitorías académicas, diseño, comunicación, producción de recursos, apoyo operativo o soporte administrativo.</p>
+        <p class="parrafo">Todo estudiante beneficiario se vincula a la Fundación y realiza un aporte en especie de carácter formativo, definido según sus habilidades: monitorías académicas, diseño, comunicación, producción de recursos o soporte administrativo.</p>
 
-        <p class="parrafo">El propósito del programa no es económico, sino formativo. Un estudiante que ingresa a la educación superior sin trayectoria previa suele graduarse años después en la misma condición: con un título académico y sin experiencia demostrable. El Círculo interviene sobre esa limitación desde el primer semestre.</p>
+        <p class="parrafo">El propósito no es económico. Un estudiante que ingresa sin trayectoria previa suele graduarse años después con título académico y sin experiencia demostrable. El Círculo interviene sobre esa limitación desde el primer semestre: al culminar su formación, el beneficiario cuenta con entregables, referencias y una trayectoria verificable.</p>
 
-        <p class="parrafo">Durante sus estudios, el beneficiario desarrolla su actividad en un entorno real de trabajo, con responsabilidades definidas, plazos y criterios de calidad. Al culminar su formación cuenta con entregables, referencias y una trayectoria verificable, además del título.</p>
-
-        <p class="parrafo">El programa contempla además la participación de los beneficiarios de cohortes anteriores como monitores y mentores de las siguientes, lo que fortalece la sostenibilidad del modelo y consolida una comunidad de apoyo entre pares.</p>
+        <p class="parrafo">Los beneficiarios de cohortes anteriores participan como monitores y mentores de las siguientes, lo que consolida una comunidad de apoyo entre pares.</p>
 
         <details class="mas">
           <summary>Alcance y condiciones del programa</summary>
@@ -806,33 +813,33 @@ body.sin-scroll{overflow:hidden}
     <div class="malla">
       <div class="col-rotulo rotulo">
         <h2>Plan de Apadrinamiento</h2>
-        <p class="meta">Vinculación de personas y organizaciones al sostenimiento de un estudiante</p>
+        <p class="meta">Acompaña la trayectoria de un estudiante</p>
       </div>
       <div class="col-texto">
-        <p class="entradilla">El Plan de Apadrinamiento vincula a personas y organizaciones con la trayectoria concreta de un estudiante, allí donde el beneficio de acceso no alcanza.</p>
+        <p class="entradilla">Puedes acompañar el proceso de un estudiante desde su ingreso a la educación superior hasta su grado.</p>
 
-        <p class="parrafo">Una beca cubre la matrícula. Sostener una carrera, además, exige transporte diario, alimentación, materiales y conectividad. Son esos costos, y no el desempeño académico, los que con mayor frecuencia interrumpen un proceso educativo.</p>
+        <p class="parrafo">El beneficio de acceso resuelve la matrícula. Sostener una carrera exige además lo cotidiano: el transporte hasta el campus, la alimentación, los materiales, la conexión para estudiar en casa. Cuando eso falta, el estudiante no se retira por bajo rendimiento. Se retira aunque le esté yendo bien.</p>
 
-        <p class="parrafo">Apadrinar consiste en respaldar de manera periódica el proceso de un estudiante vinculado a la Fundación. El aporte se orienta a cubrir las necesidades identificadas durante la valoración de su contexto y a sostener el acompañamiento académico y psicosocial que hace posible su permanencia.</p>
+        <p class="parrafo">De tu aporte, la mayor parte se destina directamente al estudiante, según las necesidades identificadas en su proceso. Una parte menor sostiene la operación de la Fundación, y esa proporción se te informa al vincularte y se acredita en los reportes.</p>
 
-        <p class="parrafo">La mayor parte de cada aporte se destina de forma directa al apoyo del estudiante. Una proporción menor se destina a la operación que hace posible ese apoyo: la aplicación de los instrumentos, las visitas a las familias, el seguimiento académico y la elaboración de los reportes. Esa distribución se informa a quien apadrina en el momento de la vinculación y se acredita en los reportes periódicos.</p>
+        <p class="parrafo">Esa parte no es un costo administrativo abstracto. Es lo que hace posible que el estudiante no esté solo: el acompañamiento psicológico cuando la presión aparece, las tutorías cuando una materia se complica, el seguimiento académico periodo a periodo, la relación sostenida con su familia. Nuestros estudiantes no necesitan únicamente recursos. Necesitan que alguien esté pendiente, y eso también hay que sostenerlo.</p>
 
-        <p class="parrafo">Quien apadrina recibe información periódica sobre el avance académico del estudiante y sobre la ejecución de los recursos aportados, conforme a los principios de confidencialidad y minimización de datos.</p>
+        <p class="parrafo">Recibirás información periódica sobre el avance de ese estudiante y sobre la ejecución de los recursos que aportaste.</p>
 
         <details class="mas">
           <summary>Condiciones del apadrinamiento</summary>
           <div class="contenido">
             <h3 class="valor-titulo">Protección del estudiante</h3>
-            <p>La relación se administra en su totalidad a través de la Fundación. No se establece contacto directo entre quien apadrina y el estudiante sin autorización expresa del acudiente cuando se trate de menores de edad, y en ningún caso se comparten datos personales sensibles ni información que permita su identificación sin consentimiento previo.</p>
+            <p>La relación se administra en su totalidad a través de la Fundación. No se establece contacto directo entre quien apadrina y el estudiante sin autorización expresa del acudiente cuando se trate de menores de edad, y en ningún caso se comparten datos sensibles ni información que permita su identificación sin consentimiento previo.</p>
 
             <h3 class="valor-titulo">Destinación de los aportes</h3>
             <p>Los aportes no se entregan en efectivo al estudiante ni a su familia. Se ejecutan mediante pagos directos a terceros o a la institución educativa, según las necesidades acreditadas en el plan de apoyo de cada beneficiario.</p>
 
             <h3 class="valor-titulo">Alcance del vínculo</h3>
-            <p>El apadrinamiento no otorga a quien aporta injerencia en la selección de beneficiarios, en las decisiones académicas del estudiante ni en la operación de la Fundación. Se pacta por periodos académicos y es renovable de común acuerdo.</p>
+            <p>El apadrinamiento no otorga injerencia en la selección de beneficiarios, en las decisiones académicas del estudiante ni en la operación de la Fundación. Se pacta por periodos académicos y es renovable de común acuerdo.</p>
 
             <h3 class="valor-titulo">Transparencia</h3>
-            <p>Cada apadrinamiento se formaliza por escrito, con la destinación de los recursos, la periodicidad de los reportes y las condiciones de terminación claramente establecidas.</p>
+            <p>Cada apadrinamiento se formaliza por escrito, con la destinación de los recursos, la proporción exacta que se dirige al estudiante y a la operación, la periodicidad de los reportes y las condiciones de terminación.</p>
           </div>
         </details>
       </div>
@@ -903,9 +910,13 @@ body.sin-scroll{overflow:hidden}
         <h2 style="font-size:1rem">Información adicional</h2>
       </div>
       <div class="col-texto">
-        <p class="rotulo-min" style="margin-bottom:.9rem">Tratamiento de datos personales</p>
-        <p class="parrafo" style="font-size:.95rem;color:var(--acero)">Recolectamos y tratamos datos personales conforme a la Ley 1581 de 2012 y al Decreto 1377 de 2013. La participación de cualquier estudiante requiere consentimiento informado del acudiente, y la información individual se comparte con instituciones aliadas únicamente con autorización previa y bajo el principio de minimización de datos.</p>
-        <p class="parrafo" style="font-size:.95rem;color:var(--acero)">Para consultar, actualizar o suprimir tus datos, o para pedir copia de nuestra política de tratamiento de la información, escríbenos a <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
+        <details class="mas" style="margin-top:0;border-top:0">
+          <summary style="padding-top:0">Tratamiento de datos personales</summary>
+          <div class="contenido">
+            <p>Recolectamos y tratamos datos personales conforme a la Ley 1581 de 2012 y al Decreto 1377 de 2013. La participación de cualquier estudiante requiere consentimiento informado del acudiente, y la información individual se comparte con instituciones aliadas únicamente con autorización previa y bajo el principio de minimización de datos.</p>
+            <p style="margin-top:1rem">Para consultar, actualizar o suprimir tus datos, o para pedir copia de nuestra política de tratamiento de la información, escríbenos a <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>.</p>
+          </div>
+        </details>
       </div>
     </div>
   </div>
@@ -1047,10 +1058,17 @@ function alternar(i){
 
 const tm = document.getElementById('tira-movil');
 ETAPAS.forEach((e,i)=>{
-  const d = document.createElement('div');
-  d.innerHTML = '<b>'+String(i+1).padStart(2,'0')+'</b><div><strong>'+e.t+'</strong><span>'+e.d
+  const d = document.createElement('details');
+  d.innerHTML = '<summary><b>'+String(i+1).padStart(2,'0')+'</b>'
+              + '<strong>'+e.t+'</strong>'
+              + '<span class="signo" aria-hidden="true">+</span></summary>'
+              + '<span>'+e.d
               + (e.enlace ? ' <a class="enlace-texto" href="'+e.enlace+'">'+e.enlaceTexto+'</a>' : '')
-              + '</span></div>';
+              + '</span>';
+  d.addEventListener('toggle', ()=>{
+    const s = d.querySelector('.signo');
+    if (s) s.textContent = d.open ? '–' : '+';
+  });
   tm.appendChild(d);
 });
 </script>

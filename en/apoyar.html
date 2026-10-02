@@ -135,6 +135,7 @@
           </div>
 
           <button class="boton-donar" id="btn-donar" type="button">Continue</button>
+          <p class="alterna"><button type="button" id="btn-transferir" class="enlace-boton">I prefer a bank transfer</button></p>
 
           <div class="panel-pago" id="panel-pago" role="region" aria-live="polite">
             <p class="resumen" id="resumen"></p>
@@ -249,7 +250,7 @@ document.getElementById('anio').textContent = new Date().getFullYear();
     mensual: { 30000:"", 50000:"", 100000:"", otro:"" }
   };
   const MONTOS = { unica:[50000,100000,200000], mensual:[30000,50000,100000] };
-  const TXT = { unica:"one time", mensual:"every month", resumen:"You are contributing {m}, {f}." };
+  const TXT = { unica:"one time", mensual:"every month", resumen:"You are contributing {m}, {f}.", botonPago:"Donate online" };
 
   const cajaMontos = document.getElementById('montos');
   const otro   = document.getElementById('otro');
@@ -286,14 +287,25 @@ document.getElementById('anio').textContent = new Date().getFullYear();
     [...cajaMontos.children].forEach(b=>b.setAttribute('aria-selected','false'));
   });
 
+  function mostrarCuenta(){
+    if(!monto){ otro.focus(); return; }
+    resumen.textContent = TXT.resumen.replace('{m}', pesos(monto)).replace('{f}', TXT[frec]);
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
   btn.addEventListener('click', ()=>{
     if(!monto){ otro.focus(); return; }
     const enlace = ENLACES[frec][monto] || ENLACES[frec].otro;
     if(enlace){ window.open(enlace, '_blank', 'noopener'); return; }
-    resumen.textContent = TXT.resumen.replace('{m}', pesos(monto)).replace('{f}', TXT[frec]);
-    panel.classList.add('visible');
-    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    mostrarCuenta();
   });
+
+  document.getElementById('btn-transferir').addEventListener('click', mostrarCuenta);
+
+  /* si ya hay enlaces de pago configurados, el botón principal cambia de nombre */
+  const hayPago = Object.values(ENLACES).some(o => Object.values(o).some(v => v));
+  if (hayPago) btn.textContent = TXT.botonPago;
 
   pintar();
 })();

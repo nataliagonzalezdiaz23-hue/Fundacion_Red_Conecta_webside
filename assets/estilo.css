@@ -488,7 +488,7 @@ body.sin-scroll{overflow:hidden}
   padding:1rem 1.5rem;text-decoration:none;
 }
 .boton-donar:hover{background:#00203F}
-.panel-pago{display:none;margin-top:1.75rem;border-left:3px solid var(--turquesa);padding-left:1.25rem}
+.panel-pago{display:none;margin-top:1.75rem;margin-bottom:2rem;border-left:3px solid var(--turquesa);padding-left:1.25rem}
 .panel-pago.visible{display:block}
 .panel-pago .resumen{
   font-family:var(--sans);font-size:.9rem;font-weight:600;color:var(--tinta);margin:0 0 1rem;
@@ -497,3 +497,11 @@ body.sin-scroll{overflow:hidden}
 .panel-pago dt{color:var(--acero)}
 .panel-pago dd{margin:0;color:var(--tinta);font-weight:600}
 .panel-pago .nota{margin:1.25rem 0 0;font-size:.88rem;line-height:1.6;color:var(--acero)}
+
+.alterna{margin:.9rem 0 1.75rem}
+.enlace-boton{
+  appearance:none;background:none;border:0;padding:0;cursor:pointer;
+  font-family:var(--sans);font-size:.85rem;color:var(--acero);
+  border-bottom:1px solid var(--hilo);
+}
+.enlace-boton:hover{color:var(--tinta);border-bottom-color:var(--tinta)}

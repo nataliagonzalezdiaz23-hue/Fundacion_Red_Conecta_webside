@@ -1,0 +1,126 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     CANDADO DE ACCESO — Fundación Red Conecta
+     Pegue este bloque completo justo después de la etiqueta <body>
+     de cada aplicación. No modifique nada más del archivo.
+
+     Para cambiar la contraseña, abra herramientas/generar-candado.html
+     y reemplace las dos líneas de RC_LLAVE con lo que le genere.
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="rc-candado" hidden>
+  <div class="rc-caja">
+    <img class="rc-logo" src="https://fundacionredconecta.org/assets/logo-blanco.webp" alt="Fundación Red Conecta" onerror="this.style.display=&quot;none&quot;">
+    <h1 class="rc-titulo">Acceso restringido</h1>
+    <p class="rc-sub">Esta herramienta contiene información de estudiantes y familias. Ingresa con las credenciales del equipo.</p>
+    <form id="rc-form" autocomplete="on">
+      <label class="rc-label" for="rc-usuario">Usuario</label>
+      <input class="rc-input" id="rc-usuario" type="text" required autocomplete="username" spellcheck="false">
+      <label class="rc-label" for="rc-clave">Contraseña</label>
+      <input class="rc-input" id="rc-clave" type="password" required autocomplete="current-password">
+      <button class="rc-boton" id="rc-entrar" type="submit">Entrar</button>
+    </form>
+    <p class="rc-error" id="rc-error" hidden>Usuario o contraseña incorrectos.</p>
+    <p class="rc-pie"><a href="https://fundacionredconecta.org/acceso.html">Volver al portal del equipo</a></p>
+  </div>
+</div>
+
+<style>
+  #rc-candado{
+    position:fixed;inset:0;z-index:2147483647;background:#003366;color:#fff;
+    display:flex;align-items:center;justify-content:center;padding:1.5rem;
+    font-family:'Montserrat',system-ui,-apple-system,sans-serif;overflow:auto;
+  }
+  #rc-candado *{box-sizing:border-box}
+  #rc-candado .rc-caja{width:100%;max-width:400px}
+  #rc-candado .rc-logo{height:40px;width:auto;display:block;margin-bottom:2.5rem}
+  #rc-candado .rc-titulo{
+    font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.02em;
+    font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;margin:0 0 1rem;color:#fff;
+  }
+  #rc-candado .rc-sub{font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.62);margin:0 0 2.5rem}
+  #rc-candado .rc-label{
+    display:block;font-size:.72rem;font-weight:600;letter-spacing:.04em;
+    color:rgba(255,255,255,.55);margin:0 0 .5rem;
+  }
+  #rc-candado .rc-input{
+    width:100%;padding:.75rem 0;border:0;border-bottom:1px solid rgba(255,255,255,.18);
+    background:none;color:#fff;font-family:inherit;font-size:1.05rem;margin-bottom:1.75rem;
+  }
+  #rc-candado .rc-input:focus{border-bottom-color:#00CED1;outline:none}
+  #rc-candado .rc-boton{
+    width:100%;padding:.95rem;border:0;background:#00CED1;color:#00323a;
+    font-family:inherit;font-weight:600;font-size:.85rem;letter-spacing:.03em;cursor:pointer;
+  }
+  #rc-candado .rc-boton:hover{background:#31dcde}
+  #rc-candado .rc-boton:disabled{opacity:.55;cursor:progress}
+  #rc-candado .rc-error{
+    margin:1.5rem 0 0;padding-left:1rem;border-left:2px solid #FF7F50;
+    font-size:.85rem;color:#ffcdb8;
+  }
+  #rc-candado .rc-pie{margin-top:2.5rem;font-size:.78rem;color:rgba(255,255,255,.45)}
+  #rc-candado .rc-pie a{color:#00CED1}
+  html.rc-bloqueado, html.rc-bloqueado body{overflow:hidden !important}
+</style>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ── Llave de acceso. Cámbiela con herramientas/generar-candado.html ── */
+  const RC_LLAVE = {
+    s: "tcu81uLpGup/j1DjJvw6ZA==",
+    h: "gtOsnk5xZwwb1mSLnxsjALm/x7TxFYJ3GtjneGzsIlo="
+  };
+  /* ──────────────────────────────────────────────────────────────────── */
+
+  const CLAVE_SESION = "rc_app_sesion";
+  const candado = document.getElementById("rc-candado");
+  const error   = document.getElementById("rc-error");
+  const boton   = document.getElementById("rc-entrar");
+
+  /* Si ya validó en esta pestaña, no vuelve a pedir nada */
+  if (sessionStorage.getItem(CLAVE_SESION) === RC_LLAVE.h) return;
+
+  /* Bloquea la aplicación mientras no haya validación */
+  document.documentElement.classList.add("rc-bloqueado");
+  candado.hidden = false;
+  setTimeout(function(){ const u = document.getElementById("rc-usuario"); if (u) u.focus(); }, 150);
+
+  const bin = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+  const b64 = buf => btoa(String.fromCharCode.apply(null, new Uint8Array(buf)));
+
+  async function derivar(usuario, clave){
+    const material = await crypto.subtle.importKey("raw",
+      new TextEncoder().encode(usuario.toLowerCase().trim() + ":" + clave),
+      "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits(
+      { name:"PBKDF2", salt: bin(RC_LLAVE.s), iterations:200000, hash:"SHA-256" },
+      material, 256);
+    return b64(bits);
+  }
+
+  document.getElementById("rc-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    boton.disabled = true; boton.textContent = "Verificando…"; error.hidden = true;
+
+    try {
+      const calculado = await derivar(
+        document.getElementById("rc-usuario").value,
+        document.getElementById("rc-clave").value
+      );
+      if (calculado === RC_LLAVE.h) {
+        sessionStorage.setItem(CLAVE_SESION, RC_LLAVE.h);
+        document.documentElement.classList.remove("rc-bloqueado");
+        candado.remove();
+        return;
+      }
+      throw new Error("credenciales");
+    } catch (err) {
+      error.hidden = false;
+      document.getElementById("rc-clave").value = "";
+    } finally {
+      boton.disabled = false; boton.textContent = "Entrar";
+    }
+  });
+})();
+</script>
+<!-- ═══════════════ FIN DEL CANDADO DE ACCESO ═══════════════ -->

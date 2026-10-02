@@ -1,67 +1,28 @@
 # Sitio web — Fundación Red Conecta
 
-Sitio institucional estático más un área de acceso restringido a las herramientas internas.
-No requiere servidor propio, ni base de datos para la parte pública, ni proceso de compilación.
+https://fundacionredconecta.org · sitio estático en Vercel, publicado desde GitHub.
 
 ```
-index.html      Sitio público
-acceso.html     Login y portal de herramientas internas
-assets/         Logotipos y favicon (fondo transparente)
-vercel.json     Cabeceras de seguridad y caché
-robots.txt      Excluye /acceso de los buscadores
+index.html        Inicio (español)
+alianzas.html     Colegios, universidades y servicios complementarios
+programa.html     Metodología y Círculo de Contribución
+apoyar.html       Apadrinamiento y donaciones
+en/               Las mismas cuatro páginas en inglés
+acceso.html       Portal interno, protegido con contraseña
+404.html          Página de error
+assets/estilo.css Hoja de estilo compartida por todas las páginas
+assets/           Logotipos, fotografías y logos de aliados
+herramientas/     Generadores de contraseña (no enlazados desde el sitio)
+sitemap.xml       Las ocho páginas, con sus equivalencias de idioma
+robots.txt        Excluye /acceso y /herramientas
+vercel.json       Cabeceras y direcciones limpias
 ```
 
----
+**Todo el diseño vive en `assets/estilo.css`.** Para cambiar un color, una tipografía o un espaciado,
+se edita ahí una sola vez y cambia en las diez páginas. Nunca vuelva a pegar estilos dentro de un HTML.
 
-## 1. Datos de contacto
-
-Busque los corchetes en `index.html` y reemplácelos:
-
-Los datos de contacto ya están puestos: fundacionredconecta@gmail.com, +57 313 401 1695 y
-Bogotá, Colombia. Aparecen en la portada, en "Protección de datos", en "Hablemos" y en la
-página de acceso.
-
-Los datos de identificación de la entidad (NIT, representante legal, domicilio fiscal) no aparecen
-en el sitio. Cuando decida publicarlos, el lugar natural es la sección "Protección de datos" o el
-pie de página.
-
-En la sección **Alianzas** hay un párrafo sobre aliados. Solo publique el nombre y el logo de una
-institución cuando ella lo haya autorizado por escrito; mientras tanto, deje el texto actual.
-
----
-
-## 2. Publicar en Vercel
-
-1. Cree un repositorio en GitHub, por ejemplo `sitio-red-conecta`, y suba estos archivos a la raíz.
-2. En Vercel: **Add New → Project → Import Git Repository**.
-3. Framework Preset: **Other**. No hay build command ni output directory.
-4. **Deploy**.
-
-Cada vez que haga un commit en GitHub, Vercel vuelve a publicar solo.
-
-### Dominio
-
-El sitio vive en **https://fundacionredconecta.org**, comprado en Vercel el 8 de septiembre de 2026,
-con renovación automática al 8 de septiembre de 2027. Al haberse comprado dentro de Vercel, los
-nameservers quedan configurados solos: no hay registros DNS que mantener.
-
-### Indexación en Google
-
-`sitemap.xml` lista la página y `robots.txt` lo declara, además de excluir `/acceso` y
-`/herramientas`. `index.html` incluye etiquetas canónicas, metadatos de vista previa con direcciones
-absolutas y un bloque de datos estructurados de tipo NGO con el nombre, la descripción, el correo,
-el teléfono, la ciudad y el enlace a Instagram.
-
-Al agregar páginas nuevas hay que sumarlas al `sitemap.xml`, y si algún día cambia el dominio, hay
-que actualizar las direcciones absolutas de `index.html`, `sitemap.xml` y `robots.txt`.
-
-### Dominio propio, referencia
-
-Cómprelo donde prefiera (`.org` o `.org.co` son los habituales para una fundación) y en Vercel vaya a
-**Settings → Domains → Add**. Vercel le indica los registros DNS que debe crear en su proveedor y
-emite el certificado HTTPS automáticamente.
-
----
+Las direcciones no llevan `.html` porque Vercel tiene activado `cleanUrls`. Los enlaces internos
+apuntan a `/alianzas`, `/en/programa`, etc.
 
 ## 3. Acceso al área interna
 
@@ -135,50 +96,3 @@ acompañe una foto con el nombre completo de un menor.
 
 Un espacio que no vaya a llenarse debe borrarse del HTML, no dejarse con el marcador visible.
 
-## 5. Rendimiento y accesibilidad
-
-Ajustes aplicados y que conviene mantener al agregar contenido:
-
-- **Imágenes en WebP.** Todas las fotos y logos están en `.webp`, que pesa entre un tercio y la
-  mitad que el JPG o PNG equivalente. Los `.jpg` y `.png` antiguos siguen en el repositorio pero
-  ya nadie los descarga; puede borrarlos cuando quiera, salvo `compartir.jpg` y los `favicon*.png`,
-  que sí se usan.
-- **Carga diferida.** Solo el logo, la marca de agua de la portada y la primera banda cargan de
-  inmediato. El resto llega cuando el visitante se acerca. Al agregar una imagen nueva, copie el
-  patrón: `loading="lazy" decoding="async"` más `width` y `height`.
-- **Dimensiones declaradas.** Cada `<img>` lleva su ancho y alto reales. Sin eso el texto salta
-  cuando la foto termina de cargar, y Google penaliza ese salto.
-- **Jerarquía de encabezados.** Un solo `h1` (el titular de la portada), `h2` para cada sección y
-  `h3` para subtítulos. No saltar niveles.
-- **Página de error.** `404.html` se sirve automáticamente cuando alguien escribe una dirección
-  que no existe.
-- **Color de barra.** `theme-color` pinta la barra del navegador en celular con el azul de la marca.
-
-La portada carga hoy unos 170 KB de imágenes, frente a los 2,4 MB que descargaba antes de golpe.
-
-## 6. Sistema visual
-
-La dirección de diseño es editorial y tipográfica: retícula de doce columnas visible mediante reglas
-de un pixel, tipografía de gran escala como elemento principal, y color usado como acontecimiento
-puntual en vez de decoración distribuida.
-
-- **Azul Medianoche `#003366`** sostiene la portada, la declaración, el contacto y el pie.
-- **Turquesa `#00CED1`** aparece en tres lugares y nada más: la regla que atraviesa el titular
-  (el mismo recurso que el logotipo usa entre "Fundación" y "Red Conecta"), el nodo que marca listas
-  y enlaces de acceso, y el bloque completo del Círculo de Contribución.
-- **Lora** carga el peso expresivo en tamaños grandes; **Montserrat** queda para rótulos, cifras,
-  navegación y microtexto.
-- Sin esquinas redondeadas, sin sombras, sin tarjetas. La jerarquía la construyen las reglas,
-  la escala y el espacio.
-- Una sola animación en toda la página: la entrada del titular y el trazo de la regla al cargar.
-  Se desactiva sola si el sistema operativo pide movimiento reducido.
-
-## 7. Mantenimiento
-
-Todo el contenido está en HTML plano, con el texto legible dentro del archivo. Para cambiar una
-sección, edite el párrafo directamente. Las ocho etapas del proceso viven en el arreglo `ETAPAS`
-al final de `index.html`: cambiar el texto ahí actualiza la tira de escalones y la versión móvil
-a la vez. Cada etapa tiene un nombre completo (`t`), que aparece en el detalle, y uno corto
-(`corto`), que aparece en la tira.
-
-Las variables de color y tipografía están declaradas al inicio del `<style>` de cada archivo.

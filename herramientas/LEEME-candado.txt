@@ -1,0 +1,44 @@
+CANDADO DE ACCESO PARA LAS TRES APLICACIONES
+
+QUÉ RESUELVE
+Hoy las tres aplicaciones viven en sus propias direcciones de Vercel y son públicas:
+quien tenga el enlace directo entra sin pasar por el portal. Este bloque agrega una
+pantalla de contraseña al abrir cada aplicación.
+
+CÓMO INSTALARLO (una vez por aplicación)
+
+1. Abra el archivo candado-para-apps.html y copie TODO su contenido.
+
+2. Abra el archivo de la aplicación (por ejemplo index.html del repositorio
+   de entrevistas-familiares).
+
+3. Busque la etiqueta <body>. Pegue el bloque JUSTO DESPUÉS de esa etiqueta,
+   antes de cualquier otro contenido.
+
+4. Guarde y suba el archivo al repositorio de esa aplicación. Vercel republica sola.
+
+5. Repita en las otras dos aplicaciones. El mismo bloque sirve para las tres.
+
+CREDENCIALES
+Las mismas del portal. Hoy son usuario "equipo" y contraseña "RedConecta2027".
+La contraseña se pide una vez por pestaña: al cerrarla, vuelve a pedirla.
+
+PARA CAMBIAR LA CONTRASEÑA
+Abra generar-candado.html en el navegador, escriba las credenciales nuevas y
+reemplace en las tres aplicaciones las cuatro líneas que empiezan en
+"const RC_LLAVE = {" y terminan en "};". Use la misma contraseña que el portal.
+
+HASTA DÓNDE PROTEGE
+Este candado impide el acceso casual: quien llegue con el enlace ve una pantalla
+de contraseña en lugar de la herramienta. No es una caja fuerte: alguien con
+conocimientos técnicos puede saltárselo, porque toda la validación ocurre en el
+navegador y no hay servidor que la imponga.
+
+Conviene tener presente que los datos de las entrevistas se guardan hoy en el
+dispositivo de quien las registró, no en un servidor común. Alguien que abra la
+aplicación desde otro equipo no vería información de ninguna familia.
+
+Eso cambia el día que conecte Supabase: ahí los datos pasan a estar en la nube y
+la protección real deja de ser este candado y pasa a ser Row Level Security en la
+base de datos, con una cuenta por persona. Ese es el paso siguiente cuando llegue
+el momento.

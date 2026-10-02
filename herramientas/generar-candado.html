@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Generar llave del candado — Fundación Red Conecta</title>
+<style>
+  :root{--tinta:#003366;--turquesa:#00CED1;--acero:#708090;--nube:#F1F5F9;--coral:#FF7F50}
+  *{box-sizing:border-box}
+  body{margin:0;padding:clamp(1.5rem,5vw,4rem);background:var(--nube);color:#2E4053;
+       font-family:'Montserrat',system-ui,sans-serif;font-size:15px;line-height:1.6}
+  .caja{max-width:720px;margin-inline:auto;background:#fff;padding:clamp(1.5rem,4vw,3rem);
+        border:1px solid rgba(112,128,144,.3)}
+  h1{font-size:1.35rem;color:var(--tinta);margin:0 0 .5rem;letter-spacing:-.01em}
+  .lead{margin:0 0 2rem;color:var(--acero);font-size:.92rem}
+  label{display:block;font-size:.72rem;font-weight:600;color:var(--acero);margin:0 0 .35rem}
+  input{width:100%;padding:.6rem .7rem;border:1px solid rgba(112,128,144,.45);
+        font:inherit;font-size:.92rem;margin-bottom:1rem;background:#fff}
+  input:focus{outline:none;border-color:var(--turquesa)}
+  .par{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:600px){.par{grid-template-columns:1fr}}
+  button{width:100%;padding:.85rem;border:0;background:var(--tinta);color:#fff;
+         font:inherit;font-weight:600;font-size:.88rem;cursor:pointer;margin-top:1rem}
+  button:hover{background:#00203F}
+  textarea{width:100%;min-height:130px;margin-top:1.5rem;padding:1rem;
+           font-family:ui-monospace,Menlo,monospace;font-size:.75rem;line-height:1.6;
+           border:1px solid rgba(112,128,144,.45);background:#fbfcfd;resize:vertical}
+  .nota{margin-top:1rem;padding-left:.9rem;border-left:2px solid var(--coral);
+        font-size:.85rem;color:var(--acero)}
+  .ok{border-left-color:var(--turquesa);color:var(--tinta)}
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Generar la llave del candado</h1>
+  <p class="lead">Genera el bloque de llave que protege las tres aplicaciones internas. Todo se calcula en este navegador; nada se envía a ningún servidor.</p>
+
+  <div class="par">
+    <div>
+      <label for="u">Usuario</label>
+      <input id="u" type="text" value="equipo" spellcheck="false">
+    </div>
+    <div>
+      <label for="c">Contraseña</label>
+      <input id="c" type="text" placeholder="Escribe la contraseña" spellcheck="false">
+    </div>
+  </div>
+
+  <button id="generar" type="button">Generar la llave</button>
+
+  <textarea id="salida" readonly placeholder="Aquí aparecerá el bloque que debes pegar en cada aplicación"></textarea>
+  <p class="nota" id="nota">Copia el resultado y reemplaza, en las tres aplicaciones, las cuatro líneas que empiezan en <b>const RC_LLAVE = {</b> y terminan en <b>};</b></p>
+</div>
+
+<script type="module">
+const b64 = a => btoa(String.fromCharCode(...new Uint8Array(a)));
+
+document.getElementById('generar').addEventListener('click', async () => {
+  const usuario = document.getElementById('u').value;
+  const clave   = document.getElementById('c').value;
+  const nota    = document.getElementById('nota');
+
+  if (!usuario.trim() || !clave) {
+    nota.className = 'nota';
+    nota.innerHTML = 'Falta el usuario o la contraseña.';
+    return;
+  }
+
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const material = await crypto.subtle.importKey("raw",
+    new TextEncoder().encode(usuario.toLowerCase().trim() + ":" + clave),
+    "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits(
+    { name:"PBKDF2", salt, iterations:200000, hash:"SHA-256" }, material, 256);
+
+  document.getElementById('salida').value =
+    'const RC_LLAVE = {\n' +
+    '    s: "' + b64(salt) + '",\n' +
+    '    h: "' + b64(bits) + '"\n' +
+    '  };';
+
+  nota.className = 'nota ok';
+  nota.innerHTML = 'Listo. Pega este bloque en las tres aplicaciones, reemplazando el que ya tienen. Usa la misma contraseña que el portal para no tener que recordar dos.';
+});
+</script>
+</body>
+</html>

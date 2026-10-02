@@ -17,4 +17,52 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://fundacionredconecta.org/alianzas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fundacionredconecta.org/alianzas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fundacionredconecta.org/en/alianzas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fundacionredconecta.org/alianzas"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fundacionredconecta.org/en/alianzas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fundacionredconecta.org/alianzas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fundacionredconecta.org/en/alianzas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fundacionredconecta.org/alianzas"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fundacionredconecta.org/programa</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fundacionredconecta.org/programa"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fundacionredconecta.org/en/programa"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fundacionredconecta.org/programa"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fundacionredconecta.org/en/programa</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fundacionredconecta.org/programa"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fundacionredconecta.org/en/programa"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fundacionredconecta.org/programa"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fundacionredconecta.org/apoyar</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fundacionredconecta.org/apoyar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fundacionredconecta.org/en/apoyar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fundacionredconecta.org/apoyar"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fundacionredconecta.org/en/apoyar</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fundacionredconecta.org/apoyar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fundacionredconecta.org/en/apoyar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fundacionredconecta.org/apoyar"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

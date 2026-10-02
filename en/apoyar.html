@@ -120,26 +120,35 @@
 
         <p class="parrafo">Unlike sponsorship, which follows one particular student, a donation goes into the general fund. It covers what is not assigned to anyone in particular: assessment instruments, travel to schools and home visits, workshop materials, and emergency support when something unexpected puts a student&rsquo;s continuity at risk.</p>
 
-        <div class="tabla">
-          <div class="fila">
-            <div class="clave">Account holder</div>
-            <p class="valor">Fundación Red Conecta<br>Tax ID (NIT) 902.034.193-1</p>
+        
+        <div class="donacion">
+          <div class="frecuencia" role="tablist" aria-label="Contribution frequency">
+            <button type="button" role="tab" data-frec="unica" aria-selected="true">One time</button>
+            <button type="button" role="tab" data-frec="mensual" aria-selected="false">Monthly</button>
           </div>
-          <div class="fila">
-            <div class="clave">Bank</div>
-            <p class="valor">[Bank name]</p>
+
+          <div class="montos" id="montos" role="group" aria-label="Contribution amount"></div>
+
+          <div class="otro-monto">
+            <label for="otro">Other amount</label>
+            <input id="otro" type="text" inputmode="numeric" placeholder="$ 0" autocomplete="off">
           </div>
-          <div class="fila">
-            <div class="clave">Account type</div>
-            <p class="valor">[Savings or checking]</p>
-          </div>
-          <div class="fila">
-            <div class="clave">Account number</div>
-            <p class="valor">[Account number]</p>
+
+          <button class="boton-donar" id="btn-donar" type="button">Continue</button>
+
+          <div class="panel-pago" id="panel-pago" role="region" aria-live="polite">
+            <p class="resumen" id="resumen"></p>
+            <dl>
+              <dt>Account holder</dt><dd>Fundación Red Conecta</dd>
+              <dt>NIT</dt><dd>902.034.193-1</dd>
+              <dt>Bank</dt><dd>[Bank name]</dd>
+              <dt>Account type</dt><dd>[Savings or checking]</dd>
+              <dt>Account number</dt><dd>[Account number]</dd>
+            </dl>
+            <p class="nota">Make the transfer for the amount shown and send us the receipt at <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>. We will then issue the donation certificate.</p>
           </div>
         </div>
 
-        <p class="parrafo" style="margin-top:2rem">If you need a donation certificate, write to <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a> with the transfer receipt and the donor&rsquo;s details.</p>
 
         <p class="parrafo">At present we receive transfers within Colombia. If you are abroad and would like to contribute, write to us and we will arrange the best way to do it.</p>
 
@@ -229,5 +238,66 @@ document.getElementById('anio').textContent = new Date().getFullYear();
   window.addEventListener('resize', ()=>{ if(window.innerWidth > 980) cerrar(); });
 })();
 </script>
+
+<script>
+(function(){
+  /* ═══ CONFIGURACIÓN ═══
+     Cuando tenga los enlaces de pago de Wompi, péguelos aquí.
+     Mientras estén vacíos, el botón muestra los datos para transferencia. */
+  const ENLACES = {
+    unica:   { 50000:"", 100000:"", 200000:"", otro:"" },
+    mensual: { 30000:"", 50000:"", 100000:"", otro:"" }
+  };
+  const MONTOS = { unica:[50000,100000,200000], mensual:[30000,50000,100000] };
+  const TXT = { unica:"one time", mensual:"every month", resumen:"You are contributing {m}, {f}." };
+
+  const cajaMontos = document.getElementById('montos');
+  const otro   = document.getElementById('otro');
+  const btn    = document.getElementById('btn-donar');
+  const panel  = document.getElementById('panel-pago');
+  const resumen= document.getElementById('resumen');
+  let frec = 'unica', monto = null;
+
+  const pesos = n => 'COP ' + n.toLocaleString('en-US');
+
+  function pintar(){
+    cajaMontos.innerHTML = '';
+    MONTOS[frec].forEach(v=>{
+      const b = document.createElement('button');
+      b.type='button'; b.textContent = pesos(v);
+      b.setAttribute('aria-selected', String(v===monto));
+      b.addEventListener('click', ()=>{ monto = v; otro.value=''; pintar(); });
+      cajaMontos.appendChild(b);
+    });
+  }
+
+  document.querySelectorAll('.frecuencia button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      frec = b.dataset.frec; monto = null; otro.value=''; panel.classList.remove('visible');
+      document.querySelectorAll('.frecuencia button').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
+      pintar();
+    });
+  });
+
+  otro.addEventListener('input', ()=>{
+    const n = parseInt(otro.value.replace(/\D/g,''),10);
+    monto = isNaN(n) ? null : n;
+    otro.value = isNaN(n) ? '' : pesos(n);
+    [...cajaMontos.children].forEach(b=>b.setAttribute('aria-selected','false'));
+  });
+
+  btn.addEventListener('click', ()=>{
+    if(!monto){ otro.focus(); return; }
+    const enlace = ENLACES[frec][monto] || ENLACES[frec].otro;
+    if(enlace){ window.open(enlace, '_blank', 'noopener'); return; }
+    resumen.textContent = TXT.resumen.replace('{m}', pesos(monto)).replace('{f}', TXT[frec]);
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  pintar();
+})();
+</script>
+
 </body>
 </html>

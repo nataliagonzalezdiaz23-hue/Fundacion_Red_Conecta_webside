@@ -120,26 +120,35 @@
 
         <p class="parrafo">A diferencia del apadrinamiento, que acompaña a un estudiante concreto, la donación ingresa al fondo general. Con él cubrimos lo que no está asignado a nadie en particular: los instrumentos de evaluación, los desplazamientos a colegios y visitas domiciliarias, los materiales de los talleres, y los apoyos de urgencia cuando algo inesperado pone en riesgo la continuidad de un estudiante.</p>
 
-        <div class="tabla">
-          <div class="fila">
-            <div class="clave">Titular</div>
-            <p class="valor">Fundación Red Conecta<br>NIT 902.034.193-1</p>
+        
+        <div class="donacion">
+          <div class="frecuencia" role="tablist" aria-label="Frecuencia del aporte">
+            <button type="button" role="tab" data-frec="unica" aria-selected="true">Una sola vez</button>
+            <button type="button" role="tab" data-frec="mensual" aria-selected="false">Mensual</button>
           </div>
-          <div class="fila">
-            <div class="clave">Banco</div>
-            <p class="valor">[Nombre del banco]</p>
+
+          <div class="montos" id="montos" role="group" aria-label="Monto del aporte"></div>
+
+          <div class="otro-monto">
+            <label for="otro">Otro monto</label>
+            <input id="otro" type="text" inputmode="numeric" placeholder="$ 0" autocomplete="off">
           </div>
-          <div class="fila">
-            <div class="clave">Tipo de cuenta</div>
-            <p class="valor">[Ahorros o corriente]</p>
-          </div>
-          <div class="fila">
-            <div class="clave">Número</div>
-            <p class="valor">[Número de cuenta]</p>
+
+          <button class="boton-donar" id="btn-donar" type="button">Continuar</button>
+
+          <div class="panel-pago" id="panel-pago" role="region" aria-live="polite">
+            <p class="resumen" id="resumen"></p>
+            <dl>
+              <dt>Titular</dt><dd>Fundación Red Conecta</dd>
+              <dt>NIT</dt><dd>902.034.193-1</dd>
+              <dt>Banco</dt><dd>[Nombre del banco]</dd>
+              <dt>Tipo de cuenta</dt><dd>[Ahorros o corriente]</dd>
+              <dt>Número</dt><dd>[Número de cuenta]</dd>
+            </dl>
+            <p class="nota">Realiza la transferencia por el valor indicado y envíanos el comprobante a <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a>. Con él expedimos el certificado de donación.</p>
           </div>
         </div>
 
-        <p class="parrafo" style="margin-top:2rem">Si necesitas certificado de donación, escríbenos a <a class="enlace-texto" href="mailto:fundacionredconecta@gmail.com">fundacionredconecta@gmail.com</a> con el comprobante de la transferencia y los datos de quien dona.</p>
 
         <p class="parrafo">Por ahora recibimos transferencias desde Colombia. Si te encuentras en el exterior y quieres aportar, escríbenos y coordinamos la forma de hacerlo.</p>
 
@@ -230,5 +239,66 @@ document.getElementById('anio').textContent = new Date().getFullYear();
   window.addEventListener('resize', ()=>{ if(window.innerWidth > 980) cerrar(); });
 })();
 </script>
+
+<script>
+(function(){
+  /* ═══ CONFIGURACIÓN ═══
+     Cuando tenga los enlaces de pago de Wompi, péguelos aquí.
+     Mientras estén vacíos, el botón muestra los datos para transferencia. */
+  const ENLACES = {
+    unica:   { 50000:"", 100000:"", 200000:"", otro:"" },
+    mensual: { 30000:"", 50000:"", 100000:"", otro:"" }
+  };
+  const MONTOS = { unica:[50000,100000,200000], mensual:[30000,50000,100000] };
+  const TXT = { unica:"una sola vez", mensual:"cada mes", resumen:"Vas a aportar {m} {f}." };
+
+  const cajaMontos = document.getElementById('montos');
+  const otro   = document.getElementById('otro');
+  const btn    = document.getElementById('btn-donar');
+  const panel  = document.getElementById('panel-pago');
+  const resumen= document.getElementById('resumen');
+  let frec = 'unica', monto = null;
+
+  const pesos = n => '$' + n.toLocaleString('es-CO');
+
+  function pintar(){
+    cajaMontos.innerHTML = '';
+    MONTOS[frec].forEach(v=>{
+      const b = document.createElement('button');
+      b.type='button'; b.textContent = pesos(v);
+      b.setAttribute('aria-selected', String(v===monto));
+      b.addEventListener('click', ()=>{ monto = v; otro.value=''; pintar(); });
+      cajaMontos.appendChild(b);
+    });
+  }
+
+  document.querySelectorAll('.frecuencia button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      frec = b.dataset.frec; monto = null; otro.value=''; panel.classList.remove('visible');
+      document.querySelectorAll('.frecuencia button').forEach(x=>x.setAttribute('aria-selected', String(x===b)));
+      pintar();
+    });
+  });
+
+  otro.addEventListener('input', ()=>{
+    const n = parseInt(otro.value.replace(/\D/g,''),10);
+    monto = isNaN(n) ? null : n;
+    otro.value = isNaN(n) ? '' : pesos(n);
+    [...cajaMontos.children].forEach(b=>b.setAttribute('aria-selected','false'));
+  });
+
+  btn.addEventListener('click', ()=>{
+    if(!monto){ otro.focus(); return; }
+    const enlace = ENLACES[frec][monto] || ENLACES[frec].otro;
+    if(enlace){ window.open(enlace, '_blank', 'noopener'); return; }
+    resumen.textContent = TXT.resumen.replace('{m}', pesos(monto)).replace('{f}', TXT[frec]);
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  pintar();
+})();
+</script>
+
 </body>
 </html>
